@@ -48,4 +48,12 @@ export const styles = StyleSheet.create({
     height: 44,
     marginBottom: 20,
   },
+  accountsHeader: {
+    paddingVertical: 10,
+  },
+  accountsTitle: {
+    fontSize: 20,
+    marginBottom: 6,
+    fontWeight: "bold",
+  },
 });

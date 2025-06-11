@@ -1,6 +1,6 @@
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Tabs, usePathname } from "expo-router";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, StatusBar, Text, TouchableOpacity, View } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { COLORS } from "../constants/colors";
 import { styles } from "../assets/styles/nav.styles";
@@ -14,6 +14,8 @@ export default function RootLayout() {
   );
 
   return (
+    <>
+    <StatusBar barStyle="dark-content" />
     <Tabs
       screenOptions={{
         headerStyle: {
@@ -44,10 +46,16 @@ export default function RootLayout() {
       <Tabs.Screen
         name="accounts"
         options={{
-          title: "Accounts",
-          tabBarLabel: "Accounts",
           headerRight: () => <MenuButton />,
-          headerTitle: "Accounts",
+          headerTitle: () => (
+            <View style={styles.accountsHeader}>
+              <Text style={styles.accountsTitle}>Accounts</Text>
+              <Text style={{fontSize: 15}}>Linked Accounts (0)</Text>
+            </View>
+          ),
+          headerStyle: {
+            height: 120,
+          },
           tabBarIcon: ({ color }) => (
             <View style={styles.tabIconContainer}>
               {pathname === "/accounts" ? (
@@ -84,14 +92,11 @@ export default function RootLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Dashboard",
-          tabBarLabel: "Dashboard",
           headerRight: () => <MenuButton isDashboard={true} />,
           headerStyle: {
             backgroundColor: COLORS.primary,
             height: 120,
           },
-          headerTintColor: "#fff",
           headerTitle: () => (
             <View style={styles.headerTitleContainer}>
               <View>
@@ -154,6 +159,7 @@ export default function RootLayout() {
         }}
       />
     </Tabs>
+    </>
   );
 }
 
