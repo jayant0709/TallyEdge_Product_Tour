@@ -1,6 +1,6 @@
 import { Feather, FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Tabs, useNavigation, usePathname } from "expo-router";
-import type { DrawerNavigationProp } from '@react-navigation/drawer';
+import type { DrawerNavigationProp } from "@react-navigation/drawer";
 
 import {
   Image,
@@ -15,7 +15,8 @@ import { styles } from "@/assets/styles/nav.styles";
 
 export default function RootLayout() {
   const pathname = usePathname();
-  const navigation = useNavigation<DrawerNavigationProp<Record<string, object | undefined>>>();
+  const navigation =
+    useNavigation<DrawerNavigationProp<Record<string, object | undefined>>>();
 
   const MenuButton = ({ isDashboard = false }) => (
     <TouchableOpacity
@@ -31,10 +32,10 @@ export default function RootLayout() {
       />
     </TouchableOpacity>
   );
-
   return (
     <>
       <Tabs
+        initialRouteName="index"
         screenOptions={{
           headerStyle: {
             backgroundColor: "#fff",
