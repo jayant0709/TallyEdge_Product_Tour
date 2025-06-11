@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import styles from "../assets/styles/users.styles";
+import styles from "../../../assets/styles/users.styles";
 
 export default function UsersScreen() {
   return (

@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import styles from "../assets/styles/consents.styles";
+import styles from "../../../assets/styles/consents.styles";
 
 export default function ConsentsScreen() {
   const [activeTab, setActiveTab] = useState("SELF");

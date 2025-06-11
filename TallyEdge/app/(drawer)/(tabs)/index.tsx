@@ -1,7 +1,7 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
-import { styles } from "../assets/styles/dashboard.styles";
+import { styles } from "../../../assets/styles/dashboard.styles";
 
 export default function Index() {
   const router = useRouter();

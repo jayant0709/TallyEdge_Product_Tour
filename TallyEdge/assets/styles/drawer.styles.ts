@@ -1,34 +1,60 @@
 import { COLORS } from "@/constants/colors";
 import { StyleSheet, Dimensions } from "react-native";
 
-const SCREEN_WIDTH = Dimensions.get("window").width;
-const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 export const styles = StyleSheet.create({
-  backdrop: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    zIndex: 1,
+  drawerContainer: {
+    flex: 1,
+    backgroundColor: COLORS.white,
+    margin: 0,
+    padding: 0,
   },
-  drawer: {
-    position: "absolute",
-    top: 0,
-    right: 0,
-    width: SCREEN_WIDTH * 0.8,
-    height: SCREEN_HEIGHT,
+  drawerHeader: {
+    flexDirection: "column",
+    height: 200,
+    width: "100%",
     backgroundColor: COLORS.primary,
-    padding: 20,
-    elevation: 5,
-    zIndex: 2, // must be higher than backdrop
+    paddingHorizontal: 15,
   },
-  closeBtn: {
-    alignSelf: "flex-end",
+  headerTitleContainer: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    paddingLeft: 20,
+    paddingTop: 40,
   },
-  title: {
-    fontSize: 22,
-    marginVertical: 20,
+  logoImage: {
+    width: 70,
+    height: 70,
+    resizeMode: "contain",
+    borderRadius: 5,
   },
-  navItem: {
-    marginVertical: 10,
+   tagline: {
+    color: COLORS.white,
+    fontSize: 4,
+    opacity: 0.8,
+  },
+  menuButton: {
+    justifyContent: "center", 
+    paddingRight: 10,
+    paddingTop: 50,
+  },
+  headerTop: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    height: 80
+  },
+  headerMiddle: {
+    width: "100%",
+    paddingVertical: 10,
+    marginTop: 50,
+  },
+  headerLoginText: {
+    color: COLORS.white,
+    fontSize: 16,
+    paddingLeft: 20,
   },
 });

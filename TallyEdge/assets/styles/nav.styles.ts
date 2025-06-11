@@ -1,3 +1,4 @@
+import { COLORS } from "@/constants/colors";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
   },
   tagline: {
-    color: "#fff",
+    color: COLORS.white,
     fontSize: 4,
     opacity: 0.8,
   },

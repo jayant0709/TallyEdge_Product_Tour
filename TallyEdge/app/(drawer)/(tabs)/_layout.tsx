@@ -1,0 +1,186 @@
+import { Feather, FontAwesome5, Ionicons } from "@expo/vector-icons";
+import { Tabs, useNavigation, usePathname } from "expo-router";
+import type { DrawerNavigationProp } from '@react-navigation/drawer';
+
+import {
+  Image,
+  StatusBar,
+  Text,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { COLORS } from "../../../constants/colors";
+import { styles } from "@/assets/styles/nav.styles";
+
+export default function RootLayout() {
+  const pathname = usePathname();
+  const navigation = useNavigation<DrawerNavigationProp<Record<string, object | undefined>>>();
+
+  const MenuButton = ({ isDashboard = false }) => (
+    <TouchableOpacity
+      onPress={() => {
+        navigation.openDrawer();
+      }}
+      style={styles.menuButton}
+    >
+      <Feather
+        name="menu"
+        size={24}
+        color={isDashboard ? COLORS.white : COLORS.primary}
+      />
+    </TouchableOpacity>
+  );
+
+  return (
+    <>
+      <Tabs
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#fff",
+            height: 85,
+          },
+          headerTintColor: "#333",
+          tabBarActiveTintColor: "#6E31DC",
+          tabBarInactiveTintColor: "#666",
+          headerTitleStyle: {
+            fontWeight: "bold",
+            fontSize: 24,
+          },
+          tabBarStyle: {
+            paddingBottom: 10,
+            height: 75,
+            paddingTop: 5,
+          },
+          headerTitleAlign: "left",
+          headerRightContainerStyle: {
+            paddingRight: 20,
+          },
+          headerLeftContainerStyle: {
+            paddingLeft: 20,
+          },
+        }}
+      >
+        <Tabs.Screen
+          name="accounts"
+          options={{
+            headerRight: () => <MenuButton />,
+            headerTitle: () => (
+              <View style={styles.accountsHeader}>
+                <Text style={styles.accountsTitle}>Accounts</Text>
+                <Text style={{ fontSize: 15 }}>Linked Accounts (0)</Text>
+              </View>
+            ),
+            headerStyle: {
+              height: 120,
+            },
+            tabBarIcon: ({ color }) => (
+              <View style={styles.tabIconContainer}>
+                {pathname === "/accounts" ? (
+                  <View style={styles.activeTabBackground}>
+                    <FontAwesome5 name="university" size={20} color="#fff" />
+                  </View>
+                ) : (
+                  <FontAwesome5 name="university" size={20} color={color} />
+                )}
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="consents"
+          options={{
+            title: "Consents",
+            tabBarLabel: "Consents",
+            headerRight: () => <MenuButton />,
+            headerTitle: "Consents",
+            tabBarIcon: ({ color }) => (
+              <View style={styles.tabIconContainer}>
+                {pathname === "/consents" ? (
+                  <View style={styles.activeTabBackground}>
+                    <FontAwesome5 name="thumbs-up" size={20} color="#fff" />
+                  </View>
+                ) : (
+                  <FontAwesome5 name="thumbs-up" size={20} color={color} />
+                )}
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: "Dashboard",
+            headerRight: () => <MenuButton isDashboard={true} />,
+            headerStyle: {
+              backgroundColor: COLORS.primary,
+              height: 120,
+            },
+            headerTitle: () => (
+              <View style={styles.headerTitleContainer}>
+                <View>
+                  <Image
+                    source={require("@/assets/images/logo.png")}
+                    style={styles.logoImage}
+                  />
+                </View>
+                <Text style={styles.tagline}>YOUR DATA, YOUR TERMS</Text>
+              </View>
+            ),
+            tabBarIcon: ({ color }) => (
+              <View style={styles.tabIconContainer}>
+                {pathname === "/" ? (
+                  <View style={styles.activeTabBackground}>
+                    <Ionicons name="grid" size={24} color="#fff" />
+                  </View>
+                ) : (
+                  <Ionicons name="grid-outline" size={24} color={color} />
+                )}
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="users"
+          options={{
+            title: "User Management",
+            tabBarLabel: "Users",
+            headerRight: () => <MenuButton />,
+            headerTitle: "User Management",
+            tabBarIcon: ({ color }) => (
+              <View style={styles.tabIconContainer}>
+                {pathname === "/users" ? (
+                  <View style={styles.activeTabBackground}>
+                    <Ionicons name="shield" size={24} color="#fff" />
+                  </View>
+                ) : (
+                  <Ionicons name="shield-outline" size={24} color={color} />
+                )}
+              </View>
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="activity"
+          options={{
+            title: "Activity Log",
+            tabBarLabel: "Activity",
+            headerRight: () => <MenuButton />,
+            headerTitle: "Activity Log",
+            tabBarIcon: ({ color }) => (
+              <View style={styles.tabIconContainer}>
+                {pathname === "/activity" ? (
+                  <View style={styles.activeTabBackground}>
+                    <Ionicons name="time" size={24} color="#fff" />
+                  </View>
+                ) : (
+                  <Ionicons name="time-outline" size={24} color={color} />
+                )}
+              </View>
+            ),
+          }}
+        />
+      </Tabs>
+    </>
+  );
+}

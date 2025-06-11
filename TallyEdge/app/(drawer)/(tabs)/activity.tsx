@@ -1,5 +1,5 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
-import styles from "../assets/styles/activity.styles";
+import styles from "../../../assets/styles/activity.styles";
 
 export default function ActivityScreen() {
   return (
