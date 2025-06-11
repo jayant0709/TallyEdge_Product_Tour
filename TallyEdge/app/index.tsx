@@ -1,12 +1,7 @@
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
+import { styles } from "../assets/styles/dashboard.styles";
 
 export default function Index() {
   const router = useRouter();
@@ -28,11 +23,13 @@ export default function Index() {
               />
             </View>
             <View style={styles.sectionHeaderText}>
-              <Text style={styles.sectionTitle}>Accounts</Text>
-              <Text style={styles.sectionSubtitle}>(No Accounts linked)</Text>
+              <View style={styles.sectionHeaderTextTop}>
+                <Text style={styles.sectionTitle}>Accounts</Text>
+                <Text style={styles.sectionSubtitle}>(No Accounts linked)</Text>
+              </View>
+              <Text style={styles.sectionDescription}>Add/Manage accounts</Text>
             </View>
           </View>
-          <Text style={styles.sectionDescription}>Add/Manage accounts</Text>
           <TouchableOpacity
             style={styles.purpleButton}
             onPress={() => router.push("/accounts")}
@@ -53,9 +50,11 @@ export default function Index() {
                 style={styles.sectionIcon}
               />
             </View>
-            <Text style={styles.sectionTitle}>Consents</Text>
+            <View style={styles.sectionHeaderText}>
+              <Text style={styles.sectionTitle}>Consents</Text>
+              <Text style={styles.sectionDescription}>Manage consents</Text>
+            </View>
           </View>
-          <Text style={styles.sectionDescription}>Manage consents</Text>
 
           <View style={styles.consentTypes}>
             <TouchableOpacity
@@ -71,7 +70,7 @@ export default function Index() {
             <View style={styles.divider} />
 
             <TouchableOpacity
-              style={styles.consentType}
+              style={[styles.consentType, {borderBottomEndRadius: 10, borderBottomStartRadius: 10}]}
               onPress={() => router.push("/consents")}
             >
               <Text style={styles.consentTypeTitle}>
@@ -87,111 +86,3 @@ export default function Index() {
     </ScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f5f7fa",
-  },
-  contentContainer: {
-    padding: 20,
-    alignItems: "center",
-  },
-  cardWrapper: {
-    width: "100%",
-    maxWidth: 500,
-  },
-  accountsSection: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  consentsSection: {
-    backgroundColor: "#fff",
-    borderRadius: 10,
-    padding: 20,
-    marginBottom: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  sectionHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 5,
-  },
-  iconContainer: {
-    backgroundColor: "#f0ebfa",
-    borderRadius: 10,
-    marginRight: 10,
-    width: 60,
-    height: 60,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  sectionIcon: {
-    fontSize: 24,
-  },
-  sectionHeaderText: {
-    flexDirection: "row",
-    alignItems: "baseline",
-  },
-  sectionTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#6E31DC",
-    marginRight: 5,
-  },
-  sectionSubtitle: {
-    fontSize: 16,
-    color: "#555",
-  },
-  sectionDescription: {
-    fontSize: 16,
-    color: "#666",
-    marginBottom: 15,
-    marginLeft: 5,
-  },
-  purpleButton: {
-    backgroundColor: "#6E31DC",
-    padding: 15,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  consentTypes: {
-    backgroundColor: "#f0f7fa",
-    borderRadius: 5,
-  },
-  consentType: {
-    padding: 15,
-  },
-  consentTypeTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#6E31DC",
-    marginBottom: 5,
-  },
-  consentTypeDescription: {
-    fontSize: 14,
-    color: "#666",
-  },
-  divider: {
-    height: 1,
-    backgroundColor: "#ddd",
-    marginHorizontal: 10,
-  },
-});

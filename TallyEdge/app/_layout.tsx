@@ -1,20 +1,16 @@
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Tabs, usePathname } from "expo-router";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import Feather from "@expo/vector-icons/Feather";
 import { COLORS } from "../constants/colors";
+import { styles } from "../assets/styles/nav.styles";
+import RightDrawer from "@/components/RightDrawer";
 
 export default function RootLayout() {
   const pathname = usePathname();
 
   const MenuButton = ({ isDashboard = false }) => (
-    <TouchableOpacity >
-      <Feather
-        name="menu"
-        size={24}
-        color={isDashboard ? "white" : COLORS.primary}
-      />
-    </TouchableOpacity>
+    <RightDrawer isDashboard={isDashboard} />
   );
 
   return (
@@ -92,15 +88,14 @@ export default function RootLayout() {
           tabBarLabel: "Dashboard",
           headerRight: () => <MenuButton isDashboard={true} />,
           headerStyle: {
-            backgroundColor: "#7d3fe3",
-            height: 85,
+            backgroundColor: COLORS.primary,
+            height: 120,
           },
           headerTintColor: "#fff",
           headerTitle: () => (
             <View style={styles.headerTitleContainer}>
               <View>
-                <Text style={styles.logoText}>Tally</Text>
-                <Text style={[styles.logoText, styles.logoSubText]}>Edge</Text>
+                <Image source={require("../assets/images/logo.png")} style={styles.logoImage} />
               </View>
               <Text style={styles.tagline}>YOUR DATA, YOUR TERMS</Text>
             </View>
@@ -162,64 +157,3 @@ export default function RootLayout() {
   );
 }
 
-const styles = StyleSheet.create({
-  headerTitleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    paddingLeft: 10,
-  },
-  logo: {
-    width: 28,
-    height: 28,
-    marginRight: 6,
-  },
-  logoText: {
-    color: "#fff",
-    fontSize: 22,
-    fontWeight: "bold",
-    letterSpacing: 0.5,
-  },
-  logoSubText: {
-    marginTop: -5,
-  },
-  tagline: {
-    color: "#fff",
-    fontSize: 8,
-    marginLeft: 8,
-    opacity: 0.8,
-    letterSpacing: 0.2,
-  },
-  menuButton: {
-    width: 30,
-    height: 30,
-    justifyContent: "center",
-    alignItems: "flex-end",
-  },
-  menuLine: {
-    width: 25,
-    height: 2.5,
-    marginVertical: 4,
-    borderRadius: 1,
-  },
-  whiteMenuLine: {
-    backgroundColor: "#fff",
-  },
-  darkMenuLine: {
-    backgroundColor: "#333",
-  },
-  tabIconContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  activeTabBackground: {
-    backgroundColor: "#6E31DC",
-    borderRadius: 50,
-    padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    width: 44,
-    height: 44,
-    marginBottom: 20,
-  },
-});
