@@ -1,31 +1,20 @@
 import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { Tabs, usePathname } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Feather from "@expo/vector-icons/Feather";
+import { COLORS } from "../constants/colors";
 
 export default function RootLayout() {
   const pathname = usePathname();
 
   const MenuButton = ({ isDashboard = false }) => (
-    <View style={styles.menuButton}>
-      <View
-        style={[
-          styles.menuLine,
-          isDashboard ? styles.whiteMenuLine : styles.darkMenuLine,
-        ]}
-      ></View>
-      <View
-        style={[
-          styles.menuLine,
-          isDashboard ? styles.whiteMenuLine : styles.darkMenuLine,
-        ]}
-      ></View>
-      <View
-        style={[
-          styles.menuLine,
-          isDashboard ? styles.whiteMenuLine : styles.darkMenuLine,
-        ]}
-      ></View>
-    </View>
+    <TouchableOpacity >
+      <Feather
+        name="menu"
+        size={24}
+        color={isDashboard ? "white" : COLORS.primary}
+      />
+    </TouchableOpacity>
   );
 
   return (
@@ -61,7 +50,7 @@ export default function RootLayout() {
         options={{
           title: "Accounts",
           tabBarLabel: "Accounts",
-          headerRight: () => <MenuButton isDashboard={false} />,
+          headerRight: () => <MenuButton />,
           headerTitle: "Accounts",
           tabBarIcon: ({ color }) => (
             <View style={styles.tabIconContainer}>
