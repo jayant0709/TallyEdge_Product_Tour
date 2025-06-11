@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import styles from "../assets/styles/consents.styles";
 
 export default function ConsentsScreen() {
   const [activeTab, setActiveTab] = useState("SELF");
@@ -105,84 +106,3 @@ export default function ConsentsScreen() {
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#f5f7fa",
-  },
-  tabContainer: {
-    flexDirection: "row",
-    backgroundColor: "#6E31DC",
-    paddingTop: 15,
-  },
-  tab: {
-    flex: 1,
-    alignItems: "center",
-    paddingVertical: 10,
-  },
-  activeTab: {
-    borderBottomColor: "#fff",
-  },
-  tabText: {
-    color: "rgba(255, 255, 255, 0.7)",
-    fontWeight: "500",
-    fontSize: 12,
-  },
-  activeTabText: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
-  activeTabIndicator: {
-    height: 3,
-    backgroundColor: "#fff",
-    width: "80%",
-    position: "absolute",
-    bottom: 0,
-    borderTopLeftRadius: 3,
-    borderTopRightRadius: 3,
-  },
-  contentWrapper: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  contentContainer: {
-    flex: 1,
-    width: "100%",
-    maxWidth: 600,
-  },
-  emptyState: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  emptyStateTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#333",
-    marginBottom: 10,
-  },
-  emptyStateSubtitle: {
-    fontSize: 16,
-    color: "#666",
-    textAlign: "center",
-  },
-  floatingButton: {
-    position: "absolute",
-    right: 20,
-    bottom: 20,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: "#6E31DC",
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 3,
-    elevation: 5,
-  },
-});
