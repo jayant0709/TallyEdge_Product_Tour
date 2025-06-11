@@ -8,9 +8,11 @@ import {
   View,
 } from "react-native";
 import styles from "../../../assets/styles/consents.styles";
+import { useRouter } from "expo-router";
 
 export default function ConsentsScreen() {
   const [activeTab, setActiveTab] = useState("SELF");
+  const router = useRouter();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.tabContainer}>
@@ -100,7 +102,10 @@ export default function ConsentsScreen() {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.floatingButton}>
+      <TouchableOpacity
+        style={styles.floatingButton}
+        onPress={() => router.push("/consents/createConsents")}
+      >
         <Ionicons name="add" size={30} color="#fff" />
       </TouchableOpacity>
     </SafeAreaView>
