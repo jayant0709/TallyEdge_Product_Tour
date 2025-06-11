@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#6E31DC",
     paddingTop: 15,
+    marginTop: 10,
+    marginHorizontal: 10,
+    borderRadius: 10,
   },
   tab: {
     flex: 1,
@@ -20,8 +23,9 @@ const styles = StyleSheet.create({
   },
   tabText: {
     color: "rgba(255, 255, 255, 0.7)",
-    fontWeight: "500",
-    fontSize: 12,
+    fontWeight: "600",
+    fontSize: 14,
+    textAlign: "center",
   },
   activeTabText: {
     color: "#fff",
