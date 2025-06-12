@@ -1,0 +1,148 @@
+import { COLORS } from '@/constants/colors';
+import { StyleSheet } from 'react-native';
+
+export const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: COLORS.background,
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: COLORS.white,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#EEEEEE',
+  },
+  headingText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.text,
+    marginLeft: 10,
+  },
+  scrollView: {
+    flex: 1,
+    paddingBottom: 160,
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: COLORS.text,
+    marginHorizontal: 16,
+    marginTop: 8,
+    marginBottom: 8,
+  },
+  selectAllContainer: {
+    paddingHorizontal: 16,
+    marginBottom: 12,
+  },
+  selectAllText: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#6E31DC',
+    textDecorationLine: 'underline',
+  },
+  card: {
+    backgroundColor: COLORS.white,
+    borderRadius: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    marginHorizontal: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 2 },
+    elevation: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#F5F5F5',
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderWidth: 1,
+    borderColor: COLORS.primary,
+    borderRadius: 2,
+    marginRight: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: COLORS.white,
+  },
+  checkedBox: {
+    borderColor: '#6E31DC',
+    backgroundColor: '#F8F6FF',
+  },
+  bankLogoContainer: {
+    marginRight: 16,
+  },
+  bankLogo: {
+    width: 24,
+    height: 24,
+  },
+  bankDetailsContainer: {
+    flex: 1,
+  },
+  bankName: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: COLORS.text,
+    marginBottom: 4,
+  },
+  accountDetailsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  accountInfo: {
+    fontSize: 14,
+    color: '#666666',
+    lineHeight: 20,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: COLORS.white,
+    paddingTop: 16,
+    paddingBottom: 10,
+    paddingHorizontal: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#F0F0F0',
+  },
+  nextButton: {
+    backgroundColor: '#CCCCCC',
+    borderRadius: 8,
+    paddingVertical: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  activeButton: {
+    backgroundColor: '#6E31DC',
+  },
+  buttonText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: COLORS.white,
+    letterSpacing: 0.5,
+  },
+  footerTextContainer: {
+    alignItems: 'center',
+    marginTop: 12,
+    // marginBottom: 16,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  footerText: {
+    fontSize: 14,
+    color: '#666666',
+  },
+  linkText: {
+    fontSize: 14,
+    color: '#6E31DC',
+    fontWeight: '500',
+    textDecorationLine: 'underline',
+  },
+});

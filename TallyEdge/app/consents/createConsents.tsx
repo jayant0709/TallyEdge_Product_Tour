@@ -18,7 +18,10 @@ const CreateConsent = () => {
 
       <Text style={styles.sectionTitle}>Financial Institution Types</Text>
 
-      <Pressable style={styles.card}>
+      <Pressable
+        style={styles.card}
+        onPress={() => router.push("/consents/selectAccountConsent")}
+      >
         <Text style={styles.cardText}>Accounts except GST (1)</Text>
         <Ionicons name="chevron-forward" size={20} color="#6E31DC" />
       </Pressable>
