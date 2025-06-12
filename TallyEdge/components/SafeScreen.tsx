@@ -1,14 +1,25 @@
-import { View } from 'react-native'
-import React from 'react'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet } from "react-native";
+import React from "react";
 
-const SafeScreen: React.FC<React.PropsWithChildren<{}>> = ({children}) => {
-  const insets = useSafeAreaInsets();
+type Props = {
+  children: React.ReactNode;
+  edges?: ("top" | "bottom" | "left" | "right")[];
+};
+
+const SafeScreen = ({ children, edges = ["left", "right", "bottom"] }: Props) => {
   return (
-    <View style={{paddingTop: insets.top, paddingBottom: insets.bottom, flex: 1}}>
+    <SafeAreaView style={styles.container} edges={edges}>
       {children}
-    </View>
-  )
-}
+    </SafeAreaView>
+  );
+};
 
-export default SafeScreen
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+});
+
+export default SafeScreen;
