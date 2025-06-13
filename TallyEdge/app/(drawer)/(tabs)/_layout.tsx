@@ -42,8 +42,8 @@ export default function RootLayout() {
             height: 85,
           },
           headerTintColor: "#333",
-          tabBarActiveTintColor: "#6E31DC",
-          tabBarInactiveTintColor: "#666",
+          tabBarActiveTintColor: COLORS.primary,
+          tabBarInactiveTintColor: COLORS.primary,
           headerTitleStyle: {
             fontWeight: "bold",
             fontSize: 24,
@@ -52,6 +52,9 @@ export default function RootLayout() {
             paddingBottom: 10,
             height: 75,
             paddingTop: 5,
+          },
+          tabBarLabelStyle: {
+            fontWeight: "normal",
           },
           headerTitleAlign: "left",
           headerRightContainerStyle: {
@@ -65,6 +68,7 @@ export default function RootLayout() {
         <Tabs.Screen
           name="accounts"
           options={{
+            title: "Accounts",
             headerRight: () => <MenuButton />,
             headerTitle: () => (
               <View style={styles.accountsHeader}>
@@ -75,17 +79,26 @@ export default function RootLayout() {
             headerStyle: {
               height: 120,
             },
-            tabBarIcon: ({ color }) => (
+            tabBarIcon: ({ focused }) => (
               <View style={styles.tabIconContainer}>
-                {pathname === "/accounts" ? (
+                {pathname === "/accounts" || focused ? (
                   <View style={styles.activeTabBackground}>
                     <FontAwesome5 name="university" size={20} color="#fff" />
                   </View>
                 ) : (
-                  <FontAwesome5 name="university" size={20} color={color} />
+                  <View style={styles.inactiveTabBackground}>
+                    <FontAwesome5
+                      name="university"
+                      size={20}
+                      color={COLORS.primary}
+                    />
+                  </View>
                 )}
               </View>
             ),
+            tabBarLabelStyle: {
+              fontWeight: pathname === "/accounts" ? "bold" : "normal",
+            },
           }}
         />
         <Tabs.Screen
@@ -95,17 +108,26 @@ export default function RootLayout() {
             tabBarLabel: "Consents",
             headerRight: () => <MenuButton />,
             headerTitle: "Consents",
-            tabBarIcon: ({ color }) => (
+            tabBarIcon: ({ focused }) => (
               <View style={styles.tabIconContainer}>
-                {pathname === "/consents" ? (
+                {pathname === "/consents" || focused ? (
                   <View style={styles.activeTabBackground}>
                     <FontAwesome5 name="thumbs-up" size={20} color="#fff" />
                   </View>
                 ) : (
-                  <FontAwesome5 name="thumbs-up" size={20} color={color} />
+                  <View style={styles.inactiveTabBackground}>
+                    <FontAwesome5
+                      name="thumbs-up"
+                      size={20}
+                      color={COLORS.primary}
+                    />
+                  </View>
                 )}
               </View>
             ),
+            tabBarLabelStyle: {
+              fontWeight: pathname === "/consents" ? "bold" : "normal",
+            },
           }}
         />
         <Tabs.Screen
@@ -128,17 +150,30 @@ export default function RootLayout() {
                 <Text style={styles.tagline}>YOUR DATA, YOUR TERMS</Text>
               </View>
             ),
-            tabBarIcon: ({ color }) => (
+            tabBarIcon: ({ focused }) => (
               <View style={styles.tabIconContainer}>
-                {pathname === "/" ? (
-                  <View style={styles.activeTabBackground}>
+                {pathname === "/" || focused ? (
+                  <View
+                    style={[styles.activeTabBackground, styles.dashBoardTab]}
+                  >
                     <Ionicons name="grid" size={24} color="#fff" />
                   </View>
                 ) : (
-                  <Ionicons name="grid-outline" size={24} color={color} />
+                  <View
+                    style={[styles.inactiveTabBackground, styles.dashBoardTab]}
+                  >
+                    <Ionicons
+                      name="grid-outline"
+                      size={24}
+                      color={COLORS.primary}
+                    />
+                  </View>
                 )}
               </View>
             ),
+            tabBarLabelStyle: {
+              fontWeight: pathname === "/" ? "bold" : "normal",
+            },
           }}
         />
         <Tabs.Screen
@@ -148,17 +183,26 @@ export default function RootLayout() {
             tabBarLabel: "Users",
             headerRight: () => <MenuButton />,
             headerTitle: "User Management",
-            tabBarIcon: ({ color }) => (
+            tabBarIcon: ({ focused }) => (
               <View style={styles.tabIconContainer}>
-                {pathname === "/users" ? (
+                {pathname === "/users" || focused ? (
                   <View style={styles.activeTabBackground}>
                     <Ionicons name="shield" size={24} color="#fff" />
                   </View>
                 ) : (
-                  <Ionicons name="shield-outline" size={24} color={color} />
+                  <View style={styles.inactiveTabBackground}>
+                    <Ionicons
+                      name="shield-outline"
+                      size={24}
+                      color={COLORS.primary}
+                    />
+                  </View>
                 )}
               </View>
             ),
+            tabBarLabelStyle: {
+              fontWeight: pathname === "/users" ? "bold" : "normal",
+            },
           }}
         />
         <Tabs.Screen
@@ -168,17 +212,26 @@ export default function RootLayout() {
             tabBarLabel: "Activity",
             headerRight: () => <MenuButton />,
             headerTitle: "Activity Log",
-            tabBarIcon: ({ color }) => (
+            tabBarIcon: ({ focused }) => (
               <View style={styles.tabIconContainer}>
-                {pathname === "/activity" ? (
+                {pathname === "/activity" || focused ? (
                   <View style={styles.activeTabBackground}>
                     <Ionicons name="time" size={24} color="#fff" />
                   </View>
                 ) : (
-                  <Ionicons name="time-outline" size={24} color={color} />
+                  <View style={styles.inactiveTabBackground}>
+                    <Ionicons
+                      name="time-outline"
+                      size={24}
+                      color={COLORS.primary}
+                    />
+                  </View>
                 )}
               </View>
             ),
+            tabBarLabelStyle: {
+              fontWeight: pathname === "/activity" ? "bold" : "normal",
+            },
           }}
         />
       </Tabs>
