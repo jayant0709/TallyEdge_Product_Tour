@@ -1,6 +1,5 @@
 import { COLORS } from "@/constants/colors";
 import { StyleSheet } from "react-native";
-import { SearchBar } from "react-native-screens";
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,7 +9,7 @@ export const styles = StyleSheet.create({
   header: {
     backgroundColor: COLORS.white,
     paddingHorizontal: 20,
-    paddingTop: 40,
+    paddingTop: 20,
     paddingBottom: 20,
     elevation: 4,
     shadowColor: "#000",

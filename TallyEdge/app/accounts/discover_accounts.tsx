@@ -35,7 +35,7 @@ const DiscoverAccounts = () => {
             <Text style={styles.mobileInfo}>Discover Accounts using mobile number</Text>
             <Text style={styles.mobileNumber}>+91XXXXXX1234</Text>
           </View>
-          <TouchableOpacity style={styles.pencilIcon}>
+          <TouchableOpacity style={styles.pencilIcon} onPress={()=>router.push('/accounts/add_more_details')} >
             <MaterialCommunityIcons name="pencil-outline" size={24} color={COLORS.primary} />
           </TouchableOpacity>
         </View>
