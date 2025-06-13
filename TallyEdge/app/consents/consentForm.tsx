@@ -11,6 +11,8 @@ import React, { useState } from "react";
 import { styles } from "@/assets/styles/consents.consentForm";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
+import { black } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
+import { COLORS } from "@/constants/colors";
 
 const ConsentForm = () => {
   const router = useRouter();
@@ -311,11 +313,19 @@ const ConsentForm = () => {
 
           <Text style={styles.detailsText}>
             For this consent, Purpose is{" "}
-            <Text style={{ fontWeight: "700" }}>Wealth management service</Text>
-            , Mode of access is <Text style={{ fontWeight: "700" }}>store</Text>
-            , Data life is <Text style={{ fontWeight: "700" }}>Infinite</Text>,
-            Type of information is{" "}
-            <Text style={{ fontWeight: "700" }}>
+            <Text style={{ fontWeight: "700", color: COLORS.black }}>
+              Wealth management service
+            </Text>
+            , Mode of access is{" "}
+            <Text style={{ fontWeight: "700", color: COLORS.black }}>
+              store
+            </Text>
+            , Data life is{" "}
+            <Text style={{ fontWeight: "700", color: COLORS.black }}>
+              Infinite
+            </Text>
+            , Type of information is{" "}
+            <Text style={{ fontWeight: "700", color: COLORS.black }}>
               AIF, CIS, Deposit, Equities, ETF, General Insurance, IDR,
               Insurance Policy, INVIT, Life Insurance, Mutual Funds, NPS,
               Recurring Deposit, REIT, SIP & Term Deposit
