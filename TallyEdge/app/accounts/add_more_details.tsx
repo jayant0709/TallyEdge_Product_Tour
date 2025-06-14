@@ -6,6 +6,7 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/colors";
 import { TextInput } from "react-native-gesture-handler";
 import DateInput from "@/components/DateInput";
+import AddNumberModal from "@/components/AddNumberModal";
 
 const AddMoreDetails = () => {
   const router = useRouter();
@@ -27,12 +28,22 @@ const AddMoreDetails = () => {
     </View>
   );
 
-  const renderAddNew = () => (
-    <TouchableOpacity style={styles.addNewRow} activeOpacity={0.8}>
-      <AntDesign name="plus" size={20} color={COLORS.primary} />
-      <Text style={styles.addNewText}>Mobile Number</Text>
-    </TouchableOpacity>
-  );
+  const renderAddNew = () => {
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    return (
+      <>
+        <AddNumberModal isModalVisible={isModalVisible} setIsmodalVisible={setIsModalVisible} />
+        <TouchableOpacity
+          style={styles.addNewRow}
+          activeOpacity={0.8}
+          onPress={() => setIsModalVisible(true)}
+        >
+          <AntDesign name="plus" size={20} color={COLORS.primary} />
+          <Text style={styles.addNewText}>Mobile Number</Text>
+        </TouchableOpacity>
+      </>
+    );
+  };
 
   return (
     <View style={styles.container}>
