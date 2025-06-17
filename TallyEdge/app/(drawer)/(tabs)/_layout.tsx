@@ -81,7 +81,7 @@ export default function RootLayout() {
               height: 120,
             },
             tabBarIcon: ({ focused }) => (
-              <HighlightWrapper>
+              <HighlightWrapper stepNumber={1} screen='/' id='step-1b'>
               <View style={styles.tabIconContainer}>
                 {pathname === "/accounts" || focused ? (
                   <View style={styles.activeTabBackground}>
@@ -112,6 +112,7 @@ export default function RootLayout() {
             headerRight: () => <MenuButton />,
             headerTitle: "Consents",
             tabBarIcon: ({ focused }) => (
+              <HighlightWrapper id='step-2b' stepNumber={2} screen='/'>
               <View style={styles.tabIconContainer}>
                 {pathname === "/consents" || focused ? (
                   <View style={styles.activeTabBackground}>
@@ -127,6 +128,7 @@ export default function RootLayout() {
                   </View>
                 )}
               </View>
+              </HighlightWrapper>
             ),
             tabBarLabelStyle: {
               fontWeight: pathname === "/consents" ? "bold" : "normal",

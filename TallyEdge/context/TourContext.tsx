@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react';
 
-type Highlight = {
+export type Highlight = {
   id: string;
   x: number;
   y: number;
@@ -12,25 +12,22 @@ type Highlight = {
     heading: string;
     content: string;
   };
-};
-
-type TourStep = {
   stepNumber: number;
   screen: string;
-  highlights: Highlight[];
 };
 
-type TourContextType = {
-  steps: TourStep[];
-  currentStepIndex: number;
+interface TourContextType {
+  highlights: Highlight[];
+  currentStep: number;
+  totalSteps: number;
   isTourActive: boolean;
   currentHighlights: Highlight[];
-  startTour: (steps: TourStep[]) => void;
+  startTour: () => void;
   nextStep: () => void;
   prevStep: () => void;
   endTour: () => void;
-  registerHighlight: (highlight: Highlight, stepNumber: number, screen: string) => void;
-};
+  registerHighlight: (highlight: Highlight) => void;
+}
 
 const TourContext = createContext<TourContextType | null>(null);
 
@@ -41,59 +38,60 @@ export const useTour = () => {
 };
 
 export const TourProvider = ({ children }: { children: ReactNode }) => {
-  const [steps, setSteps] = useState<TourStep[]>([]);
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [highlights, setHighlights] = useState<Highlight[]>([]);
+  const [currentStep, setCurrentStep] = useState(1);
   const [isTourActive, setIsTourActive] = useState(false);
 
-  const currentHighlights = steps[currentStepIndex]?.highlights || [];
+  const totalSteps = useMemo(() => {
+    const uniqueSteps = new Set(highlights.map((h) => h.stepNumber));
+    return uniqueSteps.size;
+  }, [highlights]);
 
-  const startTour = (tourSteps: TourStep[]) => {
-    setSteps(tourSteps);
-    setCurrentStepIndex(0);
-    setIsTourActive(true);
+  const currentHighlights = useMemo(() => {
+    return highlights.filter((h) => h.stepNumber === currentStep);
+  }, [highlights, currentStep]);
+
+  const startTour = () => {
+    if (highlights.length > 0) {
+      setIsTourActive(true);
+      setCurrentStep(1);
+    }
   };
 
   const nextStep = () => {
-    if (currentStepIndex < steps.length - 1) {
-      setCurrentStepIndex((prev) => prev + 1);
+    if (currentStep < totalSteps) {
+      setCurrentStep((prev) => prev + 1);
     } else {
       endTour();
     }
   };
 
   const prevStep = () => {
-    if (currentStepIndex > 0) {
-      setCurrentStepIndex((prev) => prev - 1);
+    if (currentStep > 1) {
+      setCurrentStep((prev) => prev - 1);
     }
   };
 
   const endTour = () => {
-    setSteps([]);
-    setCurrentStepIndex(0);
     setIsTourActive(false);
+    setHighlights([]);
+    setCurrentStep(1);
   };
 
-  const registerHighlight = (highlight: Highlight, stepNumber: number, screen: string) => {
-    setSteps((prevSteps) => {
-      const stepExists = prevSteps.find((step) => step.stepNumber === stepNumber);
-
-      if (stepExists) {
-        return prevSteps.map((step) =>
-          step.stepNumber === stepNumber
-            ? { ...step, highlights: [...step.highlights, highlight] }
-            : step
-        );
-      } else {
-        return [...prevSteps, { stepNumber, screen, highlights: [highlight] }];
-      }
+  const registerHighlight = (highlight: Highlight) => {
+    setHighlights((prev) => {
+      const exists = prev.some((h) => h.id === highlight.id);
+      if (exists) return prev;
+      return [...prev, highlight].sort((a, b) => a.stepNumber - b.stepNumber);
     });
   };
 
   return (
     <TourContext.Provider
       value={{
-        steps,
-        currentStepIndex,
+        highlights,
+        currentStep,
+        totalSteps,
         isTourActive,
         currentHighlights,
         startTour,

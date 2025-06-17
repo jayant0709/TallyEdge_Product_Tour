@@ -24,7 +24,8 @@ export default function Index() {
               tooltipHeading="Link Your Accounts"
               tooltipContent="Initially there are no accounts linked. Go ahead and link your bank accounts."
               stepNumber={1}
-              totalSteps={2}
+              screen="/"
+              id='step-1'
             >
               <View style={styles.sectionHeader}>
                 <View style={styles.iconContainer}>
@@ -59,6 +60,15 @@ export default function Index() {
 
         <View style={styles.cardWrapper}>
           <View style={styles.consentsSection}>
+            <HighlightWrapper
+              tooltip={true}
+              tooltipDirection="top"
+              tooltipHeading="Manage Your Consents"
+              tooltipContent="This is where you manage who can access your data. Tap 'Self Consent' to review yours, or 'FIU Consent' to grant access."
+              stepNumber={2}
+              screen="/"
+              id='step-2'
+            >
             <View style={styles.sectionHeader}>
               <View style={styles.iconContainer}>
                 <FontAwesome5
@@ -102,10 +112,11 @@ export default function Index() {
                 </Text>
               </TouchableOpacity>
             </View>
+            </HighlightWrapper>
           </View>
         </View>
       </ScrollView>
-      {/* <IntroExtroModal isVisible={modalVisible} onClose={() => setModalVisible(false)} title="Welcome to TallyEdge!" content="See how TallyEdge helps you manage all your financial data and consents in one secure place." buttonText="Start Tour" /> */}
+      <IntroExtroModal isVisible={modalVisible} onClose={() => setModalVisible(false)} title="Welcome to TallyEdge!" content="See how TallyEdge helps you manage all your financial data and consents in one secure place." buttonText="Start Tour" />
     </>
   );
 }

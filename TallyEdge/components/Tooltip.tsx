@@ -1,9 +1,4 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  LayoutChangeEvent,
-} from "react-native";
+import { View, Text, TouchableOpacity, LayoutChangeEvent } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/colors";
@@ -74,97 +69,91 @@ const Tooltip = ({
     }
   };
 
-const getArrowStyle = (direction: string) => {
+  const getArrowStyle = (direction: string) => {
     switch (direction) {
-        case "top":
-            return {
-                arrow: {
-                    position: "absolute",
-                    left: tooltipSize.width / 2 - 10,
-                    bottom: -12,
-                    width: 0,
-                    height: 0,
-                    borderLeftWidth: 10,
-                    borderRightWidth: 10,
-                    borderTopWidth: 12,
-                    borderLeftColor: "transparent",
-                    borderRightColor: "transparent",
-                    borderTopColor: COLORS.white,
-                    borderBottomWidth: 0,
-                    borderBottomColor: "transparent",
-                },
-                position: {},
-            };
-        case "bottom":
-            return {
-                arrow: {
-                    position: "absolute",
-                    left: tooltipSize.width / 2 - 10,
-                    top: -12,
-                    width: 0,
-                    height: 0,
-                    borderLeftWidth: 10,
-                    borderRightWidth: 10,
-                    borderBottomWidth: 12,
-                    borderLeftColor: "transparent",
-                    borderRightColor: "transparent",
-                    borderBottomColor: COLORS.white,
-                    borderTopWidth: 0,
-                    borderTopColor: "transparent",
-                },
-                position: {},
-            };
-        case "left":
-            return {
-                arrow: {
-                    position: "absolute",
-                    right: -12,
-                    top: tooltipSize.height / 2 - 10,
-                    width: 0,
-                    height: 0,
-                    borderTopWidth: 10,
-                    borderBottomWidth: 10,
-                    borderLeftWidth: 12,
-                    borderTopColor: "transparent",
-                    borderBottomColor: "transparent",
-                    borderLeftColor: COLORS.white,
-                    borderRightWidth: 0,
-                    borderRightColor: "transparent",
-                },
-                position: {},
-            };
-        case "right":
-            return {
-                arrow: {
-                    position: "absolute",
-                    left: -12,
-                    top: tooltipSize.height / 2 - 10,
-                    width: 0,
-                    height: 0,
-                    borderTopWidth: 10,
-                    borderBottomWidth: 10,
-                    borderRightWidth: 12,
-                    borderTopColor: "transparent",
-                    borderBottomColor: "transparent",
-                    borderRightColor: COLORS.white,
-                    borderLeftWidth: 0,
-                    borderLeftColor: "transparent",
-                },
-                position: {},
-            };
-        default:
-            return { arrow: {}, position: {} };
+      case "top":
+        return {
+          arrow: {
+            position: "absolute",
+            left: tooltipSize.width / 2 - 10,
+            bottom: -12,
+            width: 0,
+            height: 0,
+            borderLeftWidth: 10,
+            borderRightWidth: 10,
+            borderTopWidth: 12,
+            borderLeftColor: "transparent",
+            borderRightColor: "transparent",
+            borderTopColor: COLORS.white,
+            borderBottomWidth: 0,
+            borderBottomColor: "transparent",
+          },
+        };
+      case "bottom":
+        return {
+          arrow: {
+            position: "absolute",
+            left: tooltipSize.width / 2 - 10,
+            top: -12,
+            width: 0,
+            height: 0,
+            borderLeftWidth: 10,
+            borderRightWidth: 10,
+            borderBottomWidth: 12,
+            borderLeftColor: "transparent",
+            borderRightColor: "transparent",
+            borderBottomColor: COLORS.white,
+            borderTopWidth: 0,
+            borderTopColor: "transparent",
+          },
+        };
+      case "left":
+        return {
+          arrow: {
+            position: "absolute",
+            right: -12,
+            top: tooltipSize.height / 2 - 10,
+            width: 0,
+            height: 0,
+            borderTopWidth: 10,
+            borderBottomWidth: 10,
+            borderLeftWidth: 12,
+            borderTopColor: "transparent",
+            borderBottomColor: "transparent",
+            borderLeftColor: COLORS.white,
+            borderRightWidth: 0,
+            borderRightColor: "transparent",
+          },
+        };
+      case "right":
+        return {
+          arrow: {
+            position: "absolute",
+            left: -12,
+            top: tooltipSize.height / 2 - 10,
+            width: 0,
+            height: 0,
+            borderTopWidth: 10,
+            borderBottomWidth: 10,
+            borderRightWidth: 12,
+            borderTopColor: "transparent",
+            borderBottomColor: "transparent",
+            borderRightColor: COLORS.white,
+            borderLeftWidth: 0,
+            borderLeftColor: "transparent",
+          },
+        };
+      default:
+        return { arrow: {} };
     }
-};
+  };
 
   const tooltipStyle = getTooltipPosition();
   const arrowStyle = getArrowStyle(direction);
 
   return (
     <View style={[styles.tooltipContainer, tooltipStyle]}>
-      <View
-        style={[styles.tooltipArrowBase, arrowStyle.arrow, arrowStyle.position]}
-      />
+      <View style={[styles.tooltipArrowBase, arrowStyle.arrow]} />
 
       <View style={styles.tooltipContent} onLayout={handleLayout}>
         <TouchableOpacity onPress={onClose} style={styles.closeButton}>
@@ -184,9 +173,13 @@ const getArrowStyle = (direction: string) => {
               </TouchableOpacity>
             )}
 
-            {stepNumber < totalSteps && (
+            {stepNumber < totalSteps ? (
               <TouchableOpacity onPress={onNext} style={styles.navButton}>
                 <Text style={styles.navButtonText}>Next</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={onClose} style={styles.navButton}>
+                <Text style={styles.navButtonText}>Finish</Text>
               </TouchableOpacity>
             )}
           </View>

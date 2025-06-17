@@ -2,6 +2,7 @@ import { View, Text, Modal, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { styles } from '@/assets/styles/intro.modal.styles';
 import { Ionicons } from '@expo/vector-icons';
+import { useTour } from '@/context/TourContext';
 
 type Props = {
   isVisible: boolean;
@@ -12,6 +13,12 @@ type Props = {
 }
 
 const IntroExtroModal = ({ isVisible, onClose, title, content, buttonText }: Props) => {
+  const { startTour } = useTour();
+
+  const handlePress = () => {
+    startTour();
+    onClose();
+  }
   return (
     <Modal
       visible={isVisible}
@@ -28,7 +35,7 @@ const IntroExtroModal = ({ isVisible, onClose, title, content, buttonText }: Pro
           <Text style={styles.modalText}>{title}</Text>
           <Text style={styles.modalContentText}>{content}</Text>
 
-          <TouchableOpacity style={styles.button} onPress={onClose}>
+          <TouchableOpacity style={styles.button} onPress={() => handlePress()}>
             <Text style={styles.buttonText}>{buttonText}</Text>
           </TouchableOpacity>
         </View>
