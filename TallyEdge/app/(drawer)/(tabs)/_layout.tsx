@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { COLORS } from "../../../constants/colors";
 import { styles } from "@/assets/styles/nav.styles";
+import HighlightWrapper from "@/components/HighlightWrapper";
 
 export default function RootLayout() {
   const pathname = usePathname();
@@ -80,6 +81,7 @@ export default function RootLayout() {
               height: 120,
             },
             tabBarIcon: ({ focused }) => (
+              <HighlightWrapper>
               <View style={styles.tabIconContainer}>
                 {pathname === "/accounts" || focused ? (
                   <View style={styles.activeTabBackground}>
@@ -95,6 +97,7 @@ export default function RootLayout() {
                   </View>
                 )}
               </View>
+              </HighlightWrapper>
             ),
             tabBarLabelStyle: {
               fontWeight: pathname === "/accounts" ? "bold" : "normal",
