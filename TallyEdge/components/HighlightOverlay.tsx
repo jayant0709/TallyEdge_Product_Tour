@@ -3,6 +3,7 @@ import { View, Dimensions, StyleSheet } from 'react-native';
 import Svg, { Rect, Mask } from 'react-native-svg';
 import Tooltip from '@/components/Tooltip';
 import { useTour } from '@/context/TourContext';
+import { router } from 'expo-router';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -55,9 +56,9 @@ export default function HighlightOverlay() {
             content={rect.tooltipContent?.content || ''}
             stepNumber={currentStep}
             totalSteps={totalSteps}
-            onNext={nextStep}
-            onPrevious={prevStep}
-            onClose={endTour}
+            onNext={() => nextStep(router.push)}
+            onPrevious={() => prevStep(router.push)}
+            onClose={() => endTour()}
           />
         );
       })}

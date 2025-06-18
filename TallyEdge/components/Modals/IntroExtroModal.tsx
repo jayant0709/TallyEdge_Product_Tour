@@ -3,6 +3,7 @@ import React from 'react'
 import { styles } from '@/assets/styles/intro.modal.styles';
 import { Ionicons } from '@expo/vector-icons';
 import { useTour } from '@/context/TourContext';
+import { router } from 'expo-router';
 
 type Props = {
   isVisible: boolean;
@@ -16,7 +17,7 @@ const IntroExtroModal = ({ isVisible, onClose, title, content, buttonText }: Pro
   const { startTour } = useTour();
 
   const handlePress = () => {
-    startTour();
+    startTour(router.push);
     onClose();
   }
   return (

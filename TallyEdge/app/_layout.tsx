@@ -1,7 +1,6 @@
 import HighlightOverlay from "@/components/HighlightOverlay";
 import { TourProvider } from "@/context/TourContext";
 import { Stack } from "expo-router";
-import { StatusBar } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 

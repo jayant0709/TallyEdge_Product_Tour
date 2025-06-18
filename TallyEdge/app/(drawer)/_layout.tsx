@@ -1,7 +1,6 @@
 import { Drawer } from "expo-router/drawer";
 import DrawerContent from "@/components/DrawerContent";
 import { StatusBar } from "react-native";
-import { COLORS } from "@/constants/colors";
 import { PaperProvider } from "react-native-paper";
 
 export default function DrawerLayout() {
