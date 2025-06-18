@@ -35,35 +35,6 @@ export const styles = StyleSheet.create({
   darkMenuLine: {
     backgroundColor: "#333",
   },
-  tabIconContainer: {
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  activeTabBackground: {
-    backgroundColor: COLORS.primary,
-    borderRadius: 50,
-    // padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    width: 34,
-    height: 34,
-    marginBottom: 10,
-  },
-  inactiveTabBackground: {
-    backgroundColor: COLORS.primaryLight,
-    borderRadius: 50,
-    // padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    width: 34,
-    height: 34,
-    marginBottom: 10,
-  },
-  dashBoardTab: {
-    marginBottom: 30,
-    width: 44,
-    height: 44,
-  },
   accountsHeader: {
     paddingVertical: 10,
   },
@@ -71,5 +42,71 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 6,
     fontWeight: "bold",
+  },
+  customTabBarContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    height: 80,
+    backgroundColor: "#fff",
+    borderTopWidth: 1,
+    borderTopColor: "#e5e5e5",
+    paddingBottom: 8,
+    paddingTop: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: -2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+
+  // Tab Icon Wrapper
+  tabIconContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+
+  // Active Tab Circle
+  activeTabBackground: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 2, // Smaller margin for better text alignment
+  },
+
+  // Inactive Tab Circle
+  inactiveTabBackground: {
+    backgroundColor: COLORS.primaryLight,
+    borderRadius: 25,
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 2, // Smaller margin for better text alignment
+  },
+
+  dashBoardTab: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 32, 
+    shadowColor: COLORS.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    elevation: 5,
+  },
+
+  tabLabel: {
+    fontSize: 10, 
+    color: COLORS.primary,
+    textAlign: "center",
+    position: "relative",
   },
 });
