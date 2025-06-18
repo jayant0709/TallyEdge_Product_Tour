@@ -25,7 +25,7 @@ export default function Index() {
               tooltipContent="Initially there are no accounts linked. Go ahead and link your bank accounts."
               stepNumber={1}
               screen="/"
-              id='step-1'
+              id="step-1"
             >
               <View style={styles.sectionHeader}>
                 <View style={styles.iconContainer}>
@@ -67,56 +67,62 @@ export default function Index() {
               tooltipContent="This is where you manage who can access your data. Tap 'Self Consent' to review yours, or 'FIU Consent' to grant access."
               stepNumber={2}
               screen="/"
-              id='step-2'
+              id="step-2"
             >
-            <View style={styles.sectionHeader}>
-              <View style={styles.iconContainer}>
-                <FontAwesome5
-                  name="thumbs-up"
-                  size={24}
-                  color="#6E31DC"
-                  style={styles.sectionIcon}
-                />
+              <View style={styles.sectionHeader}>
+                <View style={styles.iconContainer}>
+                  <FontAwesome5
+                    name="thumbs-up"
+                    size={24}
+                    color="#6E31DC"
+                    style={styles.sectionIcon}
+                  />
+                </View>
+                <View style={styles.sectionHeaderText}>
+                  <Text style={styles.sectionTitle}>Consents</Text>
+                  <Text style={styles.sectionDescription}>Manage consents</Text>
+                </View>
               </View>
-              <View style={styles.sectionHeaderText}>
-                <Text style={styles.sectionTitle}>Consents</Text>
-                <Text style={styles.sectionDescription}>Manage consents</Text>
+
+              <View style={styles.consentTypes}>
+                <TouchableOpacity
+                  style={styles.consentType}
+                  onPress={() => router.push("/consents")}
+                >
+                  <Text style={styles.consentTypeTitle}>Self Consents</Text>
+                  <Text style={styles.consentTypeDescription}>
+                    Create & manage your own consents
+                  </Text>
+                </TouchableOpacity>
+
+                <View style={styles.divider} />
+
+                <TouchableOpacity
+                  style={[
+                    styles.consentType,
+                    { borderBottomEndRadius: 10, borderBottomStartRadius: 10 },
+                  ]}
+                  onPress={() => router.push("/consents")}
+                >
+                  <Text style={styles.consentTypeTitle}>
+                    Financial Institution Consents
+                  </Text>
+                  <Text style={styles.consentTypeDescription}>
+                    Manage consents received from Financial Institutions
+                  </Text>
+                </TouchableOpacity>
               </View>
-            </View>
-
-            <View style={styles.consentTypes}>
-              <TouchableOpacity
-                style={styles.consentType}
-                onPress={() => router.push("/consents")}
-              >
-                <Text style={styles.consentTypeTitle}>Self Consents</Text>
-                <Text style={styles.consentTypeDescription}>
-                  Create & manage your own consents
-                </Text>
-              </TouchableOpacity>
-
-              <View style={styles.divider} />
-
-              <TouchableOpacity
-                style={[
-                  styles.consentType,
-                  { borderBottomEndRadius: 10, borderBottomStartRadius: 10 },
-                ]}
-                onPress={() => router.push("/consents")}
-              >
-                <Text style={styles.consentTypeTitle}>
-                  Financial Institution Consents
-                </Text>
-                <Text style={styles.consentTypeDescription}>
-                  Manage consents received from Financial Institutions
-                </Text>
-              </TouchableOpacity>
-            </View>
             </HighlightWrapper>
           </View>
         </View>
       </ScrollView>
-      <IntroExtroModal isVisible={modalVisible} onClose={() => setModalVisible(false)} title="Welcome to TallyEdge!" content="See how TallyEdge helps you manage all your financial data and consents in one secure place." buttonText="Start Tour" />
+      <IntroExtroModal
+        isVisible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        title="Welcome to TallyEdge!"
+        content="See how TallyEdge helps you manage all your financial data and consents in one secure place."
+        buttonText="Start Tour"
+      />
     </>
   );
 }

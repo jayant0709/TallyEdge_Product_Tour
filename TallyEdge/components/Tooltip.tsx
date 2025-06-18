@@ -76,7 +76,7 @@ const Tooltip = ({
           arrow: {
             position: "absolute",
             left: tooltipSize.width / 2 - 10,
-            bottom: -12,
+            bottom: -30,
             width: 0,
             height: 0,
             borderLeftWidth: 10,
@@ -150,10 +150,11 @@ const Tooltip = ({
 
   const tooltipStyle = getTooltipPosition();
   const arrowStyle = getArrowStyle(direction);
-
   return (
     <View style={[styles.tooltipContainer, tooltipStyle]}>
-      <View style={[styles.tooltipArrowBase, arrowStyle.arrow]} />
+      <View
+        style={[styles.tooltipArrowBase, arrowStyle.arrow, { zIndex: 1001 }]}
+      />
 
       <View style={styles.tooltipContent} onLayout={handleLayout}>
         <TouchableOpacity onPress={onClose} style={styles.closeButton}>
