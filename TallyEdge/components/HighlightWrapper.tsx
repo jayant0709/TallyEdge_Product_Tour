@@ -39,7 +39,8 @@ export default function HighlightWrapper({
       const nodeHandle = findNodeHandle(targetRef.current);
       if (nodeHandle != null) {
         UIManager.measureInWindow(nodeHandle, (x, y, width, height) => {
-          const adjustedY = y + insets.top;
+          console.log(insets);
+          let adjustedY = y + insets.top;
           registerHighlight({
             id: id,
             x,

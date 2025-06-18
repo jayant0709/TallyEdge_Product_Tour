@@ -43,14 +43,14 @@ export default function CustomTabBar({ state, navigation }: BottomTabBarProps) {
   }) => {
     if (tab.name === "accounts") {
       return (
-        <HighlightWrapper stepNumber={1} screen="/" id="step-1b">
+        <HighlightWrapper stepNumber={1} screen="/" id="step-1-tab">
           {children}
         </HighlightWrapper>
       );
     }
     if (tab.name === "consents") {
       return (
-        <HighlightWrapper stepNumber={2} screen="/" id="step-2b">
+        <HighlightWrapper stepNumber={2} screen="/" id="step-2-tab">
           {children}
         </HighlightWrapper>
       );
