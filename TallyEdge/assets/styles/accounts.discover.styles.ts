@@ -38,6 +38,7 @@ export const styles = StyleSheet.create({
     borderRightColor: COLORS.secondaryText,
     borderRightWidth: 1,
     paddingRight: 15,
+    marginRight: 10,
     flex: 1,
   },
   mobileInfo: {
@@ -49,9 +50,6 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
     color: COLORS.text,
     paddingTop: 5,
-  },
-  pencilIcon: {
-    paddingLeft: 15,
   },
   searchBar: {
     backgroundColor: COLORS.white,

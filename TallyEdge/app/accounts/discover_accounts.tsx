@@ -72,23 +72,32 @@ const DiscoverAccounts = () => {
             </Text>
             <Text style={styles.mobileNumber}>+91XXXXXX1234</Text>
           </View>
-          <HighlightWrapper tooltip={true} tooltipDirection="left" tooltipHeading="Add More Details" tooltipContent="Add more details to your account for better discovery." stepNumber={4} screen="/accounts/discover_accounts" id="step-4">
-          <TouchableOpacity
-            style={styles.pencilIcon}
-            onPress={() => router.push("/accounts/add_more_details")}
+          <HighlightWrapper
+            tooltip={true}
+            tooltipDirection="left"
+            tooltipHeading="Add More Details"
+            tooltipContent="Add more details to your account for better discovery."
+            stepNumber={3}
+            screen="/accounts/discover_accounts"
+            id="step-3"
           >
-            <MaterialCommunityIcons
-              name="pencil-outline"
-              size={24}
-              color={COLORS.primary}
-            />
-          </TouchableOpacity>
+            <View style={{height: 40, width: 40, borderRadius: 20, backgroundColor: COLORS.white, justifyContent: 'center', alignItems: 'center'}}>
+              <TouchableOpacity
+                onPress={() => router.push("/accounts/add_more_details")}
+              >
+                <MaterialCommunityIcons
+                  name="pencil-outline"
+                  size={24}
+                  color={COLORS.primary}
+                />
+              </TouchableOpacity>
+            </View>
           </HighlightWrapper>
         </View>
 
         <TextInput placeholder="Search" style={styles.searchBar} />
       </View>
-      <HighlightWrapper
+      {/* <HighlightWrapper
         tooltip={true}
         tooltipDirection="top"
         tooltipHeading="Affiliated Banks"
@@ -96,17 +105,17 @@ const DiscoverAccounts = () => {
         stepNumber={3}
         screen="/accounts/discover_accounts"
         id="step-3"
-      >
-        <>
-          <FlatList
-            data={banks}
-            renderItem={({ item }) => <BankItem {...item} />}
-            keyExtractor={(item, index) => `${item.name}-${index}`}
-            style={styles.flatlist}
-            showsVerticalScrollIndicator={false}
-          />
-        </>
-      </HighlightWrapper>
+      > */}
+      <>
+        <FlatList
+          data={banks}
+          renderItem={({ item }) => <BankItem {...item} />}
+          keyExtractor={(item, index) => `${item.name}-${index}`}
+          style={styles.flatlist}
+          showsVerticalScrollIndicator={false}
+        />
+      </>
+      {/* </HighlightWrapper> */}
     </View>
   );
 };

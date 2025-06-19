@@ -5,10 +5,12 @@ import { styles } from "../../../assets/styles/dashboard.styles";
 import HighlightWrapper from "@/components/HighlightWrapper";
 import { useState } from "react";
 import IntroExtroModal from "@/components/Modals/IntroExtroModal";
+import { useTour } from "@/context/TourContext";
 
 export default function Index() {
   const router = useRouter();
   const [modalVisible, setModalVisible] = useState(true);
+  const { isIntroModalVisible, showIntroModal, hideIntroModal } = useTour();
 
   return (
     <>
@@ -117,8 +119,8 @@ export default function Index() {
         </View>
       </ScrollView>
       <IntroExtroModal
-        isVisible={modalVisible}
-        onClose={() => setModalVisible(false)}
+        isVisible={isIntroModalVisible}
+        onClose={() => hideIntroModal()}
         title="Welcome to TallyEdge!"
         content="See how TallyEdge helps you manage all your financial data and consents in one secure place."
         buttonText="Start Tour"

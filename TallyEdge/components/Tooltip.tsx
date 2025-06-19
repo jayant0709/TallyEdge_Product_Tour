@@ -41,7 +41,7 @@ const Tooltip = ({
   };
 
   const getTooltipPosition = () => {
-    const margin = 12;
+    const margin = 20;
 
     switch (direction) {
       case "top":
@@ -56,12 +56,12 @@ const Tooltip = ({
         };
       case "left":
         return {
-          left: x - tooltipSize.width - margin,
+          left: x - tooltipSize.width - margin - 5,
           top: y + height / 2 - tooltipSize.height / 2,
         };
       case "right":
         return {
-          left: x + width + margin,
+          left: x + width + margin + 5,
           top: y + height / 2 - tooltipSize.height / 2,
         };
       default:
@@ -76,7 +76,7 @@ const Tooltip = ({
           arrow: {
             position: "absolute",
             left: tooltipSize.width / 2 - 10,
-            bottom: -30,
+            bottom: -28,
             width: 0,
             height: 0,
             borderLeftWidth: 10,
@@ -111,7 +111,7 @@ const Tooltip = ({
         return {
           arrow: {
             position: "absolute",
-            right: -12,
+            right: 6,
             top: tooltipSize.height / 2 - 10,
             width: 0,
             height: 0,
@@ -129,7 +129,7 @@ const Tooltip = ({
         return {
           arrow: {
             position: "absolute",
-            left: -12,
+            left: 18,
             top: tooltipSize.height / 2 - 10,
             width: 0,
             height: 0,

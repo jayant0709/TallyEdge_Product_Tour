@@ -31,7 +31,10 @@ interface TourContextType {
   totalSteps: number;
   isTourActive: boolean;
   currentHighlights: Highlight[];
+  isIntroModalVisible: boolean;
   currentScreen: string;
+  showIntroModal: () => void;
+  hideIntroModal: () => void;
   startTour: (navigate: NavigationFunction) => void;
   nextStep: (navigate: NavigationFunction) => void;
   prevStep: (navigate: NavigationFunction) => void;
@@ -44,7 +47,7 @@ const screenMap: { [key: number]: string } = {
   1: "/",
   2: "/",
   3: "/accounts/discover_accounts",
-  4: "/accounts/discover_accounts",
+  // 4: "/accounts/discover_accounts",
 };
 
 const TourContext = createContext<TourContextType | null>(null);
@@ -60,6 +63,10 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isTourActive, setIsTourActive] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(screenMap[1]);
+  const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
+
+  const showIntroModal = () => setIsIntroModalVisible(true);
+  const hideIntroModal = () => setIsIntroModalVisible(false); 
 
   const totalSteps = Object.keys(screenMap).length;
 
@@ -76,6 +83,7 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
       navigate(screenMap[1] as any);
     }
     setCurrentScreen(screenMap[1]);
+    hideIntroModal(); 
   };
 
   const nextStep = (navigate: NavigationFunction) => {
@@ -133,6 +141,9 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
         isTourActive,
         currentHighlights,
         currentScreen,
+        isIntroModalVisible,
+        showIntroModal,
+        hideIntroModal,
         startTour,
         nextStep,
         prevStep,
