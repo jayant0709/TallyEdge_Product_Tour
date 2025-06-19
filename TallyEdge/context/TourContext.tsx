@@ -89,7 +89,6 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
       }
     }
   };
-
   const nextStep = () => {
     if (currentStep < totalSteps) {
       const nextStepNumber = currentStep + 1;
@@ -102,14 +101,16 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
         } else if (nextStepInfo.screen === "/accounts") {
           router.push("/(drawer)/(tabs)/accounts" as any);
         }
+        setTimeout(() => {
+          setCurrentStep(nextStepNumber);
+        }, 100);
+      } else {
+        setCurrentStep(nextStepNumber);
       }
-
-      setCurrentStep(nextStepNumber);
     } else {
       endTour();
     }
   };
-
   const prevStep = () => {
     if (currentStep > 1) {
       const prevStepNumber = currentStep - 1;
@@ -122,9 +123,12 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
         } else if (prevStepInfo.screen === "/accounts") {
           router.push("/(drawer)/(tabs)/accounts" as any);
         }
+        setTimeout(() => {
+          setCurrentStep(prevStepNumber);
+        }, 100);
+      } else {
+        setCurrentStep(prevStepNumber);
       }
-
-      setCurrentStep(prevStepNumber);
     }
   };
 

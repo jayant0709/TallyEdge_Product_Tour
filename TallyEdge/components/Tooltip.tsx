@@ -1,8 +1,16 @@
-import { View, Text, TouchableOpacity, LayoutChangeEvent } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  LayoutChangeEvent,
+  Dimensions,
+} from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/colors";
 import { styles } from "@/assets/styles/tooltip.styles";
+
+const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 type Props = {
   x: number;
@@ -39,43 +47,69 @@ const Tooltip = ({
     const { width, height } = event.nativeEvent.layout;
     setTooltipSize({ width, height });
   };
-
   const getTooltipPosition = () => {
     const margin = 12;
+    const padding = 20; // Padding from screen edges
+
+    let position: any = {};
 
     switch (direction) {
       case "top":
-        return {
+        position = {
           left: x + width / 2 - tooltipSize.width / 2,
           top: y - tooltipSize.height - margin,
         };
+        break;
       case "bottom":
-        return {
+        position = {
           left: x + width / 2 - tooltipSize.width / 2,
           top: y + height + margin,
         };
+        break;
       case "left":
-        return {
+        position = {
           left: x - tooltipSize.width - margin,
           top: y + height / 2 - tooltipSize.height / 2,
         };
+        break;
       case "right":
-        return {
+        position = {
           left: x + width + margin,
           top: y + height / 2 - tooltipSize.height / 2,
         };
+        break;
       default:
-        return {};
+        position = {};
     }
-  };
 
+    if (position.left < padding) {
+      position.left = padding;
+    } else if (position.left + tooltipSize.width > screenWidth - padding) {
+      position.left = screenWidth - tooltipSize.width - padding;
+    }
+
+    if (position.top < padding) {
+      position.top = padding;
+    } else if (position.top + tooltipSize.height > screenHeight - padding) {
+      position.top = screenHeight - tooltipSize.height - padding;
+    }
+
+    return position;
+  };
   const getArrowStyle = (direction: string) => {
+    const tooltipPosition = getTooltipPosition();
+    const elementCenterX = x + width / 2;
+    const elementCenterY = y + height / 2;
+
+    const arrowLeft = elementCenterX - (tooltipPosition.left || 0) - 10;
+    const arrowTop = elementCenterY - (tooltipPosition.top || 0) - 10;
+
     switch (direction) {
       case "top":
         return {
           arrow: {
             position: "absolute",
-            left: tooltipSize.width / 2 - 10,
+            left: Math.max(10, Math.min(arrowLeft, tooltipSize.width - 30)),
             bottom: -30,
             width: 0,
             height: 0,
@@ -93,7 +127,7 @@ const Tooltip = ({
         return {
           arrow: {
             position: "absolute",
-            left: tooltipSize.width / 2 - 10,
+            left: Math.max(10, Math.min(arrowLeft, tooltipSize.width - 30)),
             top: -12,
             width: 0,
             height: 0,
@@ -112,7 +146,7 @@ const Tooltip = ({
           arrow: {
             position: "absolute",
             right: -12,
-            top: tooltipSize.height / 2 - 10,
+            top: Math.max(10, Math.min(arrowTop, tooltipSize.height - 30)),
             width: 0,
             height: 0,
             borderTopWidth: 10,
@@ -130,7 +164,7 @@ const Tooltip = ({
           arrow: {
             position: "absolute",
             left: -12,
-            top: tooltipSize.height / 2 - 10,
+            top: Math.max(10, Math.min(arrowTop, tooltipSize.height - 30)),
             width: 0,
             height: 0,
             borderTopWidth: 10,

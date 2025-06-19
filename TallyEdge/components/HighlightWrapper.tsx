@@ -25,26 +25,40 @@ export default function HighlightWrapper({
   id,
   screen,
 }: HighlightWrapperProps) {
-  // const { addHighlight } = useHighlight();
   const targetRef = useRef(null);
   const insets = useSafeAreaInsets();
-  const { registerHighlight } = useTour();
+  const { registerHighlight, isTourActive, currentStep } = useTour();
 
   useEffect(() => {
-    setTimeout(() => measureTarget(), 0);
+    // Add a delay to ensure the component is fully rendered
+    const timeoutId = setTimeout(() => measureTarget(), 100);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
+  useEffect(() => {
+    if (isTourActive && currentStep === stepNumber) {
+      const timeoutId = setTimeout(() => measureTarget(), 100);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isTourActive, currentStep, stepNumber]);
   const measureTarget = () => {
     if (targetRef.current) {
       const nodeHandle = findNodeHandle(targetRef.current);
       if (nodeHandle != null) {
         UIManager.measureInWindow(nodeHandle, (x, y, width, height) => {
-          console.log(insets);
-          let adjustedY = y + insets.top;
+          console.log(`Measuring ${id}:`, {
+            x,
+            y,
+            width,
+            height,
+            screen,
+            stepNumber,
+          });
           registerHighlight({
             id: id,
             x,
-            y: adjustedY,
+            y,
             width,
             height,
             tooltip,
@@ -61,5 +75,13 @@ export default function HighlightWrapper({
     }
   };
 
-  return <View ref={targetRef}>{children}</View>;
+  const handleLayout = (event: any) => {
+    // Trigger measurement when layout changes
+    setTimeout(() => measureTarget(), 0);
+  };
+  return (
+    <View ref={targetRef} onLayout={handleLayout}>
+      {children}
+    </View>
+  );
 }
