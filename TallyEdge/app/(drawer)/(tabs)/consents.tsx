@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import styles from "../../../assets/styles/consents.styles";
 import { useRouter } from "expo-router";
+import HighlightWrapper from "@/components/HighlightWrapper";
 
 export default function ConsentsScreen() {
   const [activeTab, setActiveTab] = useState("SELF");
@@ -102,12 +103,22 @@ export default function ConsentsScreen() {
         </View>
       </View>
 
-      <TouchableOpacity
-        style={styles.floatingButton}
-        onPress={() => router.push("/consents/createConsents")}
+      <HighlightWrapper
+        tooltip={true}
+        tooltipDirection="top"
+        tooltipHeading="Create New Consent"
+        tooltipContent="Tap this button to create a new consent for sharing your financial data."
+        stepNumber={4}
+        screen="/consents"
+        id="step-4"
       >
-        <Ionicons name="add" size={30} color="#fff" />
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.floatingButton}
+          onPress={() => router.push("/consents/createConsents")}
+        >
+          <Ionicons name="add" size={30} color="#fff" />
+        </TouchableOpacity>
+      </HighlightWrapper>
     </SafeAreaView>
   );
 }

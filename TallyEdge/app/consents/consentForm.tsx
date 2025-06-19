@@ -13,6 +13,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import { black } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 import { COLORS } from "@/constants/colors";
+import HighlightWrapper from "@/components/HighlightWrapper";
 
 const ConsentForm = () => {
   const router = useRouter();
@@ -74,47 +75,56 @@ const ConsentForm = () => {
         </TouchableOpacity>
         <Text style={styles.headingText}>Create Consent</Text>
       </View>
-
       <ScrollView style={styles.scrollView}>
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Choose Data Type</Text>
+        <HighlightWrapper
+          tooltip={true}
+          tooltipDirection="bottom"
+          tooltipHeading="Choose Data Types"
+          tooltipContent="Select the types of financial data you want to share. You can choose Profile, Summary, or Transactions data."
+          stepNumber={5}
+          screen="/consents/consentForm"
+          id="step-5"
+        >
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Choose Data Type</Text>
 
-          <TouchableOpacity
-            style={styles.checkboxContainer}
-            onPress={() => toggleDataType("profile")}
-          >
-            <View style={styles.checkbox}>
-              {dataTypes.profile && (
-                <Ionicons name="checkmark" size={16} color="#6E31DC" />
-              )}
-            </View>
-            <Text style={styles.checkboxLabel}>Profile</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.checkboxContainer}
+              onPress={() => toggleDataType("profile")}
+            >
+              <View style={styles.checkbox}>
+                {dataTypes.profile && (
+                  <Ionicons name="checkmark" size={16} color="#6E31DC" />
+                )}
+              </View>
+              <Text style={styles.checkboxLabel}>Profile</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.checkboxContainer}
-            onPress={() => toggleDataType("summary")}
-          >
-            <View style={styles.checkbox}>
-              {dataTypes.summary && (
-                <Ionicons name="checkmark" size={16} color="#6E31DC" />
-              )}
-            </View>
-            <Text style={styles.checkboxLabel}>Summary</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.checkboxContainer}
+              onPress={() => toggleDataType("summary")}
+            >
+              <View style={styles.checkbox}>
+                {dataTypes.summary && (
+                  <Ionicons name="checkmark" size={16} color="#6E31DC" />
+                )}
+              </View>
+              <Text style={styles.checkboxLabel}>Summary</Text>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.checkboxContainer}
-            onPress={() => toggleDataType("transactions")}
-          >
-            <View style={styles.checkbox}>
-              {dataTypes.transactions && (
-                <Ionicons name="checkmark" size={16} color="#6E31DC" />
-              )}
-            </View>
-            <Text style={styles.checkboxLabel}>Transactions</Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={styles.checkboxContainer}
+              onPress={() => toggleDataType("transactions")}
+            >
+              <View style={styles.checkbox}>
+                {dataTypes.transactions && (
+                  <Ionicons name="checkmark" size={16} color="#6E31DC" />
+                )}
+              </View>
+              <Text style={styles.checkboxLabel}>Transactions</Text>
+            </TouchableOpacity>
+          </View>
+        </HighlightWrapper>
 
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>
@@ -336,7 +346,6 @@ const ConsentForm = () => {
 
         <View style={{ height: 100 }} />
       </ScrollView>
-
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           style={styles.button}

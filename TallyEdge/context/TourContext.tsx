@@ -42,12 +42,12 @@ interface TourContextType {
   registerHighlight: (highlight: Highlight) => void;
 }
 
-
 const screenMap: { [key: number]: string } = {
   1: "/",
   2: "/",
   3: "/accounts/discover_accounts",
-  // 4: "/accounts/discover_accounts",
+  4: "/consents",
+  5: "/consents/consentForm",
 };
 
 const TourContext = createContext<TourContextType | null>(null);
@@ -66,7 +66,7 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
 
   const showIntroModal = () => setIsIntroModalVisible(true);
-  const hideIntroModal = () => setIsIntroModalVisible(false); 
+  const hideIntroModal = () => setIsIntroModalVisible(false);
 
   const totalSteps = Object.keys(screenMap).length;
 
@@ -83,7 +83,7 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
       navigate(screenMap[1] as any);
     }
     setCurrentScreen(screenMap[1]);
-    hideIntroModal(); 
+    hideIntroModal();
   };
 
   const nextStep = (navigate: NavigationFunction) => {
