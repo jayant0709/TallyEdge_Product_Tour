@@ -1,4 +1,10 @@
-import { View, Text, TouchableOpacity, LayoutChangeEvent } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  LayoutChangeEvent,
+  Dimensions,
+} from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/colors";
@@ -39,19 +45,32 @@ const Tooltip = ({
     const { width, height } = event.nativeEvent.layout;
     setTooltipSize({ width, height });
   };
-
   const getTooltipPosition = () => {
     const margin = 20;
+    const { width: screenWidth } = Dimensions.get("window");
+    const highlightCenterX = x + width / 2;
 
     switch (direction) {
       case "top":
+        let topLeft = highlightCenterX - tooltipSize.width / 2;
+        if (topLeft < margin) topLeft = margin;
+        if (topLeft + tooltipSize.width > screenWidth - margin) {
+          topLeft = screenWidth - margin - tooltipSize.width;
+        }
+
         return {
-          left: x + width / 2 - tooltipSize.width / 2,
+          left: topLeft,
           top: y - tooltipSize.height - margin,
         };
       case "bottom":
+        let bottomLeft = highlightCenterX - tooltipSize.width / 2;
+        if (bottomLeft < margin) bottomLeft = margin;
+        if (bottomLeft + tooltipSize.width > screenWidth - margin) {
+          bottomLeft = screenWidth - margin - tooltipSize.width;
+        }
+
         return {
-          left: x + width / 2 - tooltipSize.width / 2,
+          left: bottomLeft,
           top: y + height + margin,
         };
       case "left":
@@ -68,14 +87,17 @@ const Tooltip = ({
         return {};
     }
   };
-
   const getArrowStyle = (direction: string) => {
+    const tooltipStyle = getTooltipPosition();
+    const highlightCenterX = x + width / 2;
+
     switch (direction) {
       case "top":
+        const topArrowLeft = highlightCenterX - (tooltipStyle.left || 0) - 10;
         return {
           arrow: {
             position: "absolute",
-            left: tooltipSize.width / 2 - 10,
+            left: Math.max(10, Math.min(topArrowLeft, tooltipSize.width - 30)),
             bottom: -28,
             width: 0,
             height: 0,
@@ -90,10 +112,15 @@ const Tooltip = ({
           },
         };
       case "bottom":
+        const bottomArrowLeft =
+          highlightCenterX - (tooltipStyle.left || 0) - 10;
         return {
           arrow: {
             position: "absolute",
-            left: tooltipSize.width / 2 - 10,
+            left: Math.max(
+              10,
+              Math.min(bottomArrowLeft, tooltipSize.width - 30)
+            ),
             top: -12,
             width: 0,
             height: 0,
