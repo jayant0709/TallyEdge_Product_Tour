@@ -6,6 +6,7 @@ import React, {
   useMemo,
 } from "react";
 import { router } from "expo-router";
+import { replace } from "expo-router/build/global-state/routing";
 
 export type Highlight = {
   id: string;
@@ -80,9 +81,7 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
   const startTour = (navigate: NavigationFunction) => {
     setIsTourActive(true);
     setCurrentStep(1);
-    if (currentScreen !== screenMap[1]) {
-      navigate(screenMap[1] as any);
-    }
+    navigate('/');
     setCurrentScreen(screenMap[1]);
     hideIntroModal();
   };

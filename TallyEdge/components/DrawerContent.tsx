@@ -158,7 +158,7 @@ export default function DrawerContent(props: DrawerContentComponentProps) {
               </View>
             </Pressable>
             <Pressable style={styles.item} onPress={() => {
-              startTour();
+              startTour(router.push);
               props.navigation.closeDrawer();
             }}>
               <View style={styles.itemIconAndTitle}>
