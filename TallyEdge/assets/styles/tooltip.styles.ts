@@ -47,6 +47,7 @@ export const styles = StyleSheet.create({
     top: 8,
     right: 8,
     padding: 6,
+    zIndex: 1000,
     backgroundColor: "transparent",
   },
   navButtonContainer: {
