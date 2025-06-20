@@ -48,6 +48,7 @@ const screenMap: { [key: number]: string } = {
   3: "/accounts/discover_accounts",
   4: "/consents",
   5: "/consents/consentForm",
+  6: "/consents/consentForm",
 };
 
 const TourContext = createContext<TourContextType | null>(null);

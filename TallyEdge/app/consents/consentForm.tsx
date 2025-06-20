@@ -7,16 +7,20 @@ import {
   Modal,
   FlatList,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { styles } from "@/assets/styles/consents.consentForm";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useRouter } from "expo-router";
 import { black } from "react-native-paper/lib/typescript/styles/themes/v2/colors";
 import { COLORS } from "@/constants/colors";
 import HighlightWrapper from "@/components/HighlightWrapper";
+import { useTour } from "@/context/TourContext";
 
 const ConsentForm = () => {
   const router = useRouter();
+  const { currentStep, isTourActive, currentScreen } = useTour();
+  const scrollViewRef = useRef<ScrollView>(null);
+
   const [dataTypes, setDataTypes] = useState({
     profile: false,
     summary: false,
@@ -42,7 +46,6 @@ const ConsentForm = () => {
     summary: boolean;
     transactions: boolean;
   }
-
   const toggleDataType = (type: keyof DataTypes): void => {
     setDataTypes((prev) => ({
       ...prev,
@@ -75,7 +78,7 @@ const ConsentForm = () => {
         </TouchableOpacity>
         <Text style={styles.headingText}>Create Consent</Text>
       </View>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView ref={scrollViewRef} style={styles.scrollView}>
         <HighlightWrapper
           tooltip={true}
           tooltipDirection="bottom"
@@ -84,6 +87,8 @@ const ConsentForm = () => {
           stepNumber={5}
           screen="/consents/consentForm"
           id="step-5"
+          scroll={0}
+          scrollViewRef={scrollViewRef}
         >
           <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Choose Data Type</Text>
@@ -125,7 +130,6 @@ const ConsentForm = () => {
             </TouchableOpacity>
           </View>
         </HighlightWrapper>
-
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>
             Data Fetch Type
@@ -209,7 +213,6 @@ const ConsentForm = () => {
             </>
           )}
         </View>
-
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Transaction Period</Text>
 
@@ -272,33 +275,43 @@ const ConsentForm = () => {
             </View>
           )}
         </View>
+        <HighlightWrapper
+          tooltip={true}
+          tooltipDirection="bottom"
+          tooltipHeading="Consent Validity Period"
+          tooltipContent="Set the validity period for this consent. You can specify a start and end date."
+          stepNumber={6}
+          screen="/consents/consentForm"
+          id="step-6"
+          scroll={300}
+          scrollViewRef={scrollViewRef}
+        >
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Consent validity period</Text>
+            <Text style={styles.sectionSubtitle}>
+              You will be able to fetch the details as per the parameters during
+              the specified period.
+            </Text>
 
-        <View style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Consent validity period</Text>
-          <Text style={styles.sectionSubtitle}>
-            You will be able to fetch the details as per the parameters during
-            the specified period.
-          </Text>
+            <View style={styles.datePickerRow}>
+              <View style={styles.datePickerColumn}>
+                <Text style={styles.dateLabel}>Start Date</Text>
+                <TouchableOpacity style={styles.datePickerContainer}>
+                  <Text style={styles.dateText}>{consentStartDate}</Text>
+                  <Ionicons name="calendar-outline" size={20} color="#666666" />
+                </TouchableOpacity>
+              </View>
 
-          <View style={styles.datePickerRow}>
-            <View style={styles.datePickerColumn}>
-              <Text style={styles.dateLabel}>Start Date</Text>
-              <TouchableOpacity style={styles.datePickerContainer}>
-                <Text style={styles.dateText}>{consentStartDate}</Text>
-                <Ionicons name="calendar-outline" size={20} color="#666666" />
-              </TouchableOpacity>
-            </View>
-
-            <View style={styles.datePickerColumn}>
-              <Text style={styles.dateLabel}>End Date</Text>
-              <TouchableOpacity style={styles.datePickerContainer}>
-                <Text style={styles.dateText}>{consentEndDate}</Text>
-                <Ionicons name="calendar-outline" size={20} color="#666666" />
-              </TouchableOpacity>
+              <View style={styles.datePickerColumn}>
+                <Text style={styles.dateLabel}>End Date</Text>
+                <TouchableOpacity style={styles.datePickerContainer}>
+                  <Text style={styles.dateText}>{consentEndDate}</Text>
+                  <Ionicons name="calendar-outline" size={20} color="#666666" />
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-        </View>
-
+        </HighlightWrapper>
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>Consent Name</Text>
 
@@ -312,7 +325,6 @@ const ConsentForm = () => {
             />
           </View>
         </View>
-
         <View style={styles.sectionContainer}>
           <Text style={styles.sectionTitle}>
             Other Details
@@ -343,7 +355,6 @@ const ConsentForm = () => {
             .
           </Text>
         </View>
-
         <View style={{ height: 100 }} />
       </ScrollView>
       <View style={styles.buttonContainer}>

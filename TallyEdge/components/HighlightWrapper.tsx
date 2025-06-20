@@ -5,6 +5,7 @@ import {
   UIManager,
   InteractionManager,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTour } from "@/context/TourContext";
@@ -18,6 +19,8 @@ interface HighlightWrapperProps {
   stepNumber: number;
   screen: string;
   id: string;
+  scroll?: number;
+  scrollViewRef?: React.RefObject<ScrollView | null>;
 }
 
 export default function HighlightWrapper({
@@ -29,9 +32,12 @@ export default function HighlightWrapper({
   stepNumber = 1,
   id,
   screen,
+  scroll = 0,
+  scrollViewRef,
 }: HighlightWrapperProps) {
   const targetRef = useRef(null);
-  const { registerHighlight } = useTour();
+  const { registerHighlight, currentStep, isTourActive, currentScreen } =
+    useTour();
   const insets = useSafeAreaInsets();
   useEffect(() => {
     const task = InteractionManager.runAfterInteractions(() => {
@@ -39,7 +45,30 @@ export default function HighlightWrapper({
     });
 
     return () => task.cancel();
-  }, []);
+  }, [currentStep]);
+  useEffect(() => {
+    if (
+      isTourActive &&
+      currentStep === stepNumber &&
+      currentScreen === screen &&
+      scrollViewRef?.current
+    ) {
+      console.log(
+        `Scrolling to step ${stepNumber} with scroll value: ${scroll}`
+      );
+      setTimeout(() => {
+        scrollViewRef.current?.scrollTo({ y: scroll, animated: true });
+      }, 100);
+    }
+  }, [
+    currentStep,
+    isTourActive,
+    currentScreen,
+    stepNumber,
+    screen,
+    scroll,
+    scrollViewRef,
+  ]);
 
   const measureTarget = () => {
     if (targetRef.current) {
@@ -52,7 +81,7 @@ export default function HighlightWrapper({
             registerHighlight({
               id,
               x,
-              y: y + insets.top,
+              y: y + insets.top - scroll,
               width,
               height,
               tooltip,
@@ -127,12 +156,11 @@ export default function HighlightWrapper({
             width,
             height,
           });
-
           if (width > 0 && height > 0) {
             registerHighlight({
               id,
               x,
-              y: y + insets.top,
+              y: y + insets.top - scroll,
               width,
               height,
               tooltip,
