@@ -111,9 +111,9 @@ const DiscoverAccounts = () => {
         tooltipDirection="top"
         tooltipHeading="Affiliated Banks"
         tooltipContent="We support account linking for the following banks. Select your bank to get started."
-        stepNumber={7}
+        stepNumber={4}
         screen="/accounts/discover_accounts"
-        id="step-7"
+        id="step-4"
         style={{ flex: 1 }}
       >
         <FlatList

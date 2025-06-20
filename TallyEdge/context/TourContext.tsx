@@ -48,10 +48,10 @@ const screenMap: { [key: number]: string } = {
   1: "/",
   2: "/",
   3: "/accounts/discover_accounts",
-  4: "/consents",
-  5: "/consents/consentForm",
+  4: "/accounts/discover_accounts",
+  5: "/consents",
   6: "/consents/consentForm",
-  7: "/accounts/discover_accounts",
+  7: "/consents/consentForm",
   8: "/",
 };
 

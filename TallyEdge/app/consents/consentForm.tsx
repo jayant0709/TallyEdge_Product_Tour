@@ -84,9 +84,9 @@ const ConsentForm = () => {
           tooltipDirection="bottom"
           tooltipHeading="Choose Data Types"
           tooltipContent="Select the types of financial data you want to share. You can choose Profile, Summary, or Transactions data."
-          stepNumber={5}
+          stepNumber={6}
           screen="/consents/consentForm"
-          id="step-5"
+          id="step-6"
           scroll={0}
           scrollViewRef={scrollViewRef}
         >
@@ -280,9 +280,9 @@ const ConsentForm = () => {
           tooltipDirection="bottom"
           tooltipHeading="Consent Validity Period"
           tooltipContent="Set the validity period for this consent. You can specify a start and end date."
-          stepNumber={6}
+          stepNumber={7}
           screen="/consents/consentForm"
-          id="step-6"
+          id="step-7"
           scroll={300}
           scrollViewRef={scrollViewRef}
         >

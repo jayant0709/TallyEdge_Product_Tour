@@ -108,9 +108,9 @@ export default function ConsentsScreen() {
         tooltipDirection="left"
         tooltipHeading="Create New Consent"
         tooltipContent="Tap this button to create a new consent for sharing your financial data."
-        stepNumber={4}
+        stepNumber={5}
         screen="/consents"
-        id="step-4"
+        id="step-5"
       >
         <TouchableOpacity
           style={styles.floatingButton}

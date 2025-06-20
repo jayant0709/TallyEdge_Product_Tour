@@ -108,7 +108,7 @@ export default function HighlightWrapper({
     const { width: layoutWidth, height: layoutHeight } =
       event.nativeEvent.layout;
     console.log(`onLayout for ${id}:`, { layoutWidth, layoutHeight });
-    if (id === "step-4" && layoutHeight === 0) {
+    if (id === "step-5" && layoutHeight === 0) {
       const { width: screenWidth, height: screenHeight } =
         Dimensions.get("window");
       const buttonSize = 60;
