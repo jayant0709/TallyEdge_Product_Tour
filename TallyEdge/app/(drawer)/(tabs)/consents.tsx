@@ -15,7 +15,7 @@ export default function ConsentsScreen() {
   const [activeTab, setActiveTab] = useState("SELF");
   const router = useRouter();
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.tabContainer}>
         <TouchableOpacity
           style={[styles.tab, activeTab === "SELF" && styles.activeTab]}
@@ -105,7 +105,7 @@ export default function ConsentsScreen() {
 
       <HighlightWrapper
         tooltip={true}
-        tooltipDirection="top"
+        tooltipDirection="left"
         tooltipHeading="Create New Consent"
         tooltipContent="Tap this button to create a new consent for sharing your financial data."
         stepNumber={4}
@@ -119,6 +119,6 @@ export default function ConsentsScreen() {
           <Ionicons name="add" size={30} color="#fff" />
         </TouchableOpacity>
       </HighlightWrapper>
-    </SafeAreaView>
+    </View>
   );
 }

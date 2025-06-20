@@ -6,6 +6,7 @@ export const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 1000,
     alignItems: "center",
+    paddingHorizontal: 5,
   },
   tooltipArrowBase: {
     width: 0,
@@ -52,7 +53,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 12,
+    marginTop: 6,
   },
   navButton: {
     backgroundColor: COLORS.primary,

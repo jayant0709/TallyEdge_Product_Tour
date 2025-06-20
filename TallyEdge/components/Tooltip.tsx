@@ -46,7 +46,7 @@ const Tooltip = ({
     setTooltipSize({ width, height });
   };
   const getTooltipPosition = () => {
-    const margin = 20;
+    const margin = 25;
     const { width: screenWidth } = Dimensions.get("window");
     const highlightCenterX = x + width / 2;
 
@@ -98,7 +98,7 @@ const Tooltip = ({
           arrow: {
             position: "absolute",
             left: Math.max(10, Math.min(topArrowLeft, tooltipSize.width - 30)),
-            bottom: -28,
+            bottom: -12,
             width: 0,
             height: 0,
             borderLeftWidth: 10,
@@ -138,7 +138,7 @@ const Tooltip = ({
         return {
           arrow: {
             position: "absolute",
-            right: 6,
+            right: 12,
             top: tooltipSize.height / 2 - 10,
             width: 0,
             height: 0,
@@ -156,7 +156,7 @@ const Tooltip = ({
         return {
           arrow: {
             position: "absolute",
-            left: 18,
+            left: 12,
             top: tooltipSize.height / 2 - 10,
             width: 0,
             height: 0,
