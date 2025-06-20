@@ -6,7 +6,7 @@ import React, {
   useMemo,
 } from "react";
 import { router } from "expo-router";
-import { replace } from "expo-router/build/global-state/routing";
+import { navigate, replace } from "expo-router/build/global-state/routing";
 
 export type Highlight = {
   id: string;
@@ -33,18 +33,20 @@ interface TourContextType {
   isTourActive: boolean;
   currentHighlights: Highlight[];
   isIntroModalVisible: boolean;
+  isExtroModalVisible: boolean;
   currentScreen: string;
   showIntroModal: () => void;
   hideIntroModal: () => void;
+  showExtroModal: () => void;
+  hideExtroModal: () => void;
   startTour: (navigate: NavigationFunction) => void;
   nextStep: (navigate: NavigationFunction) => void;
   prevStep: (navigate: NavigationFunction) => void;
-  endTour: () => void;
+  endTour: (navigate: NavigationFunction) => void;
   registerHighlight: (highlight: Highlight) => void;
 }
 
 const screenMap: { [key: number]: string } = {
-  0: "/",
   1: "/",
   2: "/",
   3: "/accounts/discover_accounts",
@@ -52,7 +54,6 @@ const screenMap: { [key: number]: string } = {
   5: "/consents",
   6: "/consents/consentForm",
   7: "/consents/consentForm",
-  8: "/",
 };
 
 const TourContext = createContext<TourContextType | null>(null);
@@ -69,9 +70,13 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
   const [isTourActive, setIsTourActive] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(screenMap[1]);
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
+  const [isExtroModalVisible, setIsExtroModalVisible] = useState(false);
 
   const showIntroModal = () => setIsIntroModalVisible(true);
   const hideIntroModal = () => setIsIntroModalVisible(false);
+
+  const showExtroModal = () => setIsExtroModalVisible(true);
+  const hideExtroModal = () => setIsExtroModalVisible(false);
 
   const totalSteps = Object.keys(screenMap).length;
 
@@ -102,7 +107,7 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
       setCurrentScreen(targetScreen);
       setCurrentStep(nextStepNumber);
     } else {
-      endTour();
+      endTour(navigate);
     }
   };
 
@@ -121,10 +126,12 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  const endTour = () => {
+  const endTour = (navigate: NavigationFunction) => {
     setIsTourActive(false);
     setCurrentStep(-1);
     setCurrentScreen("/");
+    navigate("/");
+    showExtroModal();
   };
 
   const registerHighlight = (highlight: Highlight) => {
@@ -145,8 +152,11 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
         currentHighlights,
         currentScreen,
         isIntroModalVisible,
+        isExtroModalVisible,
+        showExtroModal,
         showIntroModal,
         hideIntroModal,
+        hideExtroModal,
         startTour,
         nextStep,
         prevStep,

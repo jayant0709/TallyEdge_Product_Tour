@@ -8,7 +8,7 @@ import { useTour } from "@/context/TourContext";
 
 export default function Index() {
   const router = useRouter();
-  const { hideIntroModal, currentStep, totalSteps } = useTour();
+  const { hideIntroModal, hideExtroModal, isIntroModalVisible, isExtroModalVisible } = useTour();
 
   return (
     <>
@@ -117,18 +117,20 @@ export default function Index() {
         </View>
       </ScrollView>
       <IntroExtroModal
-        isVisible={currentStep === 0}
+        isVisible={isIntroModalVisible}
         onClose={() => hideIntroModal()}
         title="Welcome to TallyEdge!"
         content="See how TallyEdge helps you manage all your financial data and consents in one secure place."
         buttonText="Start Tour"
+        mode="intro"
       />
       <IntroExtroModal
-        isVisible={currentStep === totalSteps - 1}
-        onClose={() => hideIntroModal()}
+        isVisible={isExtroModalVisible}
+        onClose={() => hideExtroModal()}
         title="Let's Get Started!"
         content="Setup complete. You can now start using TallyEdge to manage your financial data and consents seamlessly."
         buttonText="Finish"
+        mode="extro"
       />
     </>
   );

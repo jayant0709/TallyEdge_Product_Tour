@@ -28,7 +28,7 @@ export default function DrawerContent(props: DrawerContentComponentProps) {
   const [items, setItems] = useState([{ label: "Deepak", value: "deepak" }]);
   const [loading, setLoading] = useState(true);
   const [visible, setVisible] = useState(false);
-  const { startTour } = useTour();
+  const { showIntroModal } = useTour();
 
   const copyToClipboard = async () => {
     await Clipboard.setStringAsync("7670903855@tallyedge");
@@ -158,7 +158,7 @@ export default function DrawerContent(props: DrawerContentComponentProps) {
               </View>
             </Pressable>
             <Pressable style={styles.item} onPress={() => {
-              startTour(router.push);
+              showIntroModal();
               props.navigation.closeDrawer();
             }}>
               <View style={styles.itemIconAndTitle}>

@@ -1,9 +1,9 @@
-import { View, Text, Modal, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { styles } from '@/assets/styles/intro.modal.styles';
-import { Ionicons } from '@expo/vector-icons';
-import { useTour } from '@/context/TourContext';
-import { router } from 'expo-router';
+import { View, Text, Modal, TouchableOpacity } from "react-native";
+import React from "react";
+import { styles } from "@/assets/styles/intro.modal.styles";
+import { Ionicons } from "@expo/vector-icons";
+import { useTour } from "@/context/TourContext";
+import { router } from "expo-router";
 
 type Props = {
   isVisible: boolean;
@@ -11,19 +11,26 @@ type Props = {
   title: string;
   content: string;
   buttonText: string;
-}
+  mode: "intro" | "extro";
+};
 
-const IntroExtroModal = ({ isVisible, onClose, title, content, buttonText }: Props) => {
-  const { startTour, endTour } = useTour();
+const IntroExtroModal = ({
+  isVisible,
+  onClose,
+  title,
+  content,
+  buttonText,
+  mode,
+}: Props) => {
+  const { startTour } = useTour();
 
   const handlePress = () => {
-    if (buttonText === "Start Tour") {
+    if (mode === "intro") {
       startTour(router.push);
-    } else {
-      endTour();
+    } else if (mode === "extro") {
+      onClose();
     }
-    onClose();
-  }
+  };
   return (
     <Modal
       visible={isVisible}
@@ -34,7 +41,7 @@ const IntroExtroModal = ({ isVisible, onClose, title, content, buttonText }: Pro
       <View style={styles.overlay}>
         <View style={styles.modalContainer}>
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Ionicons name='close' size={24} color='#000' />
+            <Ionicons name="close" size={24} color="#000" />
           </TouchableOpacity>
 
           <Text style={styles.modalText}>{title}</Text>
@@ -46,7 +53,7 @@ const IntroExtroModal = ({ isVisible, onClose, title, content, buttonText }: Pro
         </View>
       </View>
     </Modal>
-  )
-}
+  );
+};
 
-export default IntroExtroModal
+export default IntroExtroModal;

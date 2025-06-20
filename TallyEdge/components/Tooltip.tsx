@@ -9,6 +9,8 @@ import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "@/constants/colors";
 import { styles } from "@/assets/styles/tooltip.styles";
+import { useTour } from "@/context/TourContext";
+import { router } from "expo-router";
 
 type Props = {
   x: number;
@@ -174,6 +176,11 @@ const Tooltip = ({
         return { arrow: {} };
     }
   };
+  const { endTour } = useTour();
+
+  const handleDone = () => {
+    endTour(router.push);
+  }
 
   const tooltipStyle = getTooltipPosition();
   const arrowStyle = getArrowStyle(direction);
@@ -191,7 +198,7 @@ const Tooltip = ({
         <Text style={styles.tooltipText}>{content}</Text>
         <View style={styles.navButtonContainer}>
           <Text style={styles.tooltipStep}>
-            {stepNumber} of {totalSteps - 2}
+            {stepNumber} of {totalSteps}
           </Text>
 
           <View style={styles.navButtonContainer}>
@@ -206,6 +213,12 @@ const Tooltip = ({
                 <Text style={styles.navButtonText}>Next</Text>
               </TouchableOpacity>
             )}
+            
+            {stepNumber === totalSteps && (
+              <TouchableOpacity onPress={() => handleDone()} style={styles.navButton}>
+                <Text style={styles.navButtonText}>Done</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </View>
@@ -214,3 +227,7 @@ const Tooltip = ({
 };
 
 export default Tooltip;
+function showExtroModal() {
+  throw new Error("Function not implemented.");
+}
+
