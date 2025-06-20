@@ -81,7 +81,16 @@ const DiscoverAccounts = () => {
             screen="/accounts/discover_accounts"
             id="step-3"
           >
-            <View style={{height: 40, width: 40, borderRadius: 20, backgroundColor: COLORS.white, justifyContent: 'center', alignItems: 'center'}}>
+            <View
+              style={{
+                height: 40,
+                width: 40,
+                borderRadius: 20,
+                backgroundColor: COLORS.white,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <TouchableOpacity
                 onPress={() => router.push("/accounts/add_more_details")}
               >
@@ -97,16 +106,16 @@ const DiscoverAccounts = () => {
 
         <TextInput placeholder="Search" style={styles.searchBar} />
       </View>
-      {/* <HighlightWrapper
+      <HighlightWrapper
         tooltip={true}
         tooltipDirection="top"
         tooltipHeading="Affiliated Banks"
-        tooltipContent="Select from a list of banks."
-        stepNumber={3}
+        tooltipContent="We support account linking for the following banks. Select your bank to get started."
+        stepNumber={7}
         screen="/accounts/discover_accounts"
-        id="step-3"
-      > */}
-      <>
+        id="step-7"
+        style={{ flex: 1 }}
+      >
         <FlatList
           data={banks}
           renderItem={({ item }) => <BankItem {...item} />}
@@ -114,8 +123,7 @@ const DiscoverAccounts = () => {
           style={styles.flatlist}
           showsVerticalScrollIndicator={false}
         />
-      </>
-      {/* </HighlightWrapper> */}
+      </HighlightWrapper>
     </View>
   );
 };

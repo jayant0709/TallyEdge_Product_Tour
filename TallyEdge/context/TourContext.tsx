@@ -51,7 +51,8 @@ const screenMap: { [key: number]: string } = {
   4: "/consents",
   5: "/consents/consentForm",
   6: "/consents/consentForm",
-  7: "/"
+  7: "/accounts/discover_accounts",
+  8: "/",
 };
 
 const TourContext = createContext<TourContextType | null>(null);
@@ -83,7 +84,7 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
   const startTour = (navigate: NavigationFunction) => {
     setIsTourActive(true);
     setCurrentStep(1);
-    navigate('/');
+    navigate("/");
     setCurrentScreen(screenMap[1]);
     hideIntroModal();
   };
@@ -123,7 +124,7 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
   const endTour = () => {
     setIsTourActive(false);
     setCurrentStep(-1);
-    setCurrentScreen('/');
+    setCurrentScreen("/");
   };
 
   const registerHighlight = (highlight: Highlight) => {

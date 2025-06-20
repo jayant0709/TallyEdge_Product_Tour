@@ -21,6 +21,7 @@ interface HighlightWrapperProps {
   id: string;
   scroll?: number;
   scrollViewRef?: React.RefObject<ScrollView | null>;
+  style?: object;
 }
 
 export default function HighlightWrapper({
@@ -34,6 +35,7 @@ export default function HighlightWrapper({
   screen,
   scroll = 0,
   scrollViewRef,
+  style,
 }: HighlightWrapperProps) {
   const targetRef = useRef(null);
   const { registerHighlight, currentStep, isTourActive, currentScreen } =
@@ -177,9 +179,8 @@ export default function HighlightWrapper({
       }
     }
   };
-
   return (
-    <View ref={targetRef} onLayout={handleLayout}>
+    <View ref={targetRef} onLayout={handleLayout} style={style}>
       {children}
     </View>
   );
