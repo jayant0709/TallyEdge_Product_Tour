@@ -44,12 +44,14 @@ interface TourContextType {
 }
 
 const screenMap: { [key: number]: string } = {
+  0: "/",
   1: "/",
   2: "/",
   3: "/accounts/discover_accounts",
   4: "/consents",
   5: "/consents/consentForm",
   6: "/consents/consentForm",
+  7: "/"
 };
 
 const TourContext = createContext<TourContextType | null>(null);
@@ -62,7 +64,7 @@ export const useTour = () => {
 
 export const TourProvider = ({ children }: { children: ReactNode }) => {
   const [highlights, setHighlights] = useState<Highlight[]>([]);
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
   const [isTourActive, setIsTourActive] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(screenMap[1]);
   const [isIntroModalVisible, setIsIntroModalVisible] = useState(true);
@@ -120,8 +122,8 @@ export const TourProvider = ({ children }: { children: ReactNode }) => {
 
   const endTour = () => {
     setIsTourActive(false);
-    setCurrentStep(1);
-    setCurrentScreen(screenMap[1]);
+    setCurrentStep(-1);
+    setCurrentScreen('/');
   };
 
   const registerHighlight = (highlight: Highlight) => {

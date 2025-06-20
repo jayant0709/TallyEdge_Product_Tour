@@ -14,10 +14,14 @@ type Props = {
 }
 
 const IntroExtroModal = ({ isVisible, onClose, title, content, buttonText }: Props) => {
-  const { startTour } = useTour();
+  const { startTour, endTour } = useTour();
 
   const handlePress = () => {
-    startTour(router.push);
+    if (buttonText === "Start Tour") {
+      startTour(router.push);
+    } else {
+      endTour();
+    }
     onClose();
   }
   return (

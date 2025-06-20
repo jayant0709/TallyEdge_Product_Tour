@@ -3,14 +3,12 @@ import { useRouter } from "expo-router";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../../../assets/styles/dashboard.styles";
 import HighlightWrapper from "@/components/HighlightWrapper";
-import { useState } from "react";
 import IntroExtroModal from "@/components/Modals/IntroExtroModal";
 import { useTour } from "@/context/TourContext";
 
 export default function Index() {
   const router = useRouter();
-  const [modalVisible, setModalVisible] = useState(true);
-  const { isIntroModalVisible, showIntroModal, hideIntroModal } = useTour();
+  const { hideIntroModal, currentStep, totalSteps } = useTour();
 
   return (
     <>
@@ -119,11 +117,18 @@ export default function Index() {
         </View>
       </ScrollView>
       <IntroExtroModal
-        isVisible={isIntroModalVisible}
+        isVisible={currentStep === 0}
         onClose={() => hideIntroModal()}
         title="Welcome to TallyEdge!"
         content="See how TallyEdge helps you manage all your financial data and consents in one secure place."
         buttonText="Start Tour"
+      />
+      <IntroExtroModal
+        isVisible={currentStep === totalSteps - 1}
+        onClose={() => hideIntroModal()}
+        title="Let's Get Started!"
+        content="Setup complete. You can now start using TallyEdge to manage your financial data and consents seamlessly."
+        buttonText="Finish"
       />
     </>
   );

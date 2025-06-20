@@ -191,7 +191,7 @@ const Tooltip = ({
         <Text style={styles.tooltipText}>{content}</Text>
         <View style={styles.navButtonContainer}>
           <Text style={styles.tooltipStep}>
-            {stepNumber} of {totalSteps}
+            {stepNumber} of {totalSteps - 2}
           </Text>
 
           <View style={styles.navButtonContainer}>
@@ -201,13 +201,9 @@ const Tooltip = ({
               </TouchableOpacity>
             )}
 
-            {stepNumber < totalSteps ? (
+            {stepNumber < totalSteps && (
               <TouchableOpacity onPress={onNext} style={styles.navButton}>
                 <Text style={styles.navButtonText}>Next</Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity onPress={onClose} style={styles.navButton}>
-                <Text style={styles.navButtonText}>Finish</Text>
               </TouchableOpacity>
             )}
           </View>
